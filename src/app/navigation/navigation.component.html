@@ -1,16 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 50px">
-  <a class="navbar-brand" href="#">Sales Report App</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <button class="nav-item nav-link" href="#" (click)="onClickToNomenclature()">Номенклатура</button>
-      <button class="nav-item nav-link" href="#" (click)="onClickToCalculation()">Калькуляция</button>
-      <button class="nav-item nav-link" href="#" (click)="onClickToGoodsInward()">Приход</button>
-      <button class="nav-item nav-link" href="#" (click)="onClickToSales()">Продажа</button>
-      <button class="nav-item nav-link" href="#" (click)="onClickToRemainingStocks()">Остатки</button>
-      <button class="nav-item nav-link" href="#" (click)="onClickToMaterialReport()">Материальный отчет</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Sales Report App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" routerLinkActive="active">
+          <button class="nav-link" href="#" routerLink="/nomenclature">Номенклатура</button>
+        </li>
+        <li class="nav-item dropdown" routerLinkActive="active">
+          <button class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLink="/calculation" >
+            Калькуляция
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><button class="dropdown-item" href="#">Action</button></li>
+            <li><button class="dropdown-item" href="#">Another action</button></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button class="dropdown-item" href="#">Something else here</button></li>
+          </ul>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <button class="nav-link" href="#" routerLink="/goods-inwards">Приход</button>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <button class="nav-link" href="#" routerLink="/sales">Продажа</button>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <button class="nav-link" href="#" routerLink="/remaining-stocks">Остатки</button>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <button class="nav-link" href="#" routerLink="/material-report">Материальный отчет</button>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>

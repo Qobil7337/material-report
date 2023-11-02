@@ -11,6 +11,8 @@ import { SalesComponent } from './sales/sales.component';
 import { RemainingStocksComponent } from './remaining-stocks/remaining-stocks.component';
 import { MaterialReportComponent } from './material-report/material-report.component';
 import { HomeComponent } from './home/home.component';
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

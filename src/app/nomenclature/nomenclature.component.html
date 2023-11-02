@@ -13,7 +13,66 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ item.id }}</td>
       <td>{{ item.name }}</td>
+      <button type="button" class=" btn btn-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
+      <button type="button" class=" btn btn-success btn-sm" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
     </tr>
     </tbody>
   </table>
 </div>
+<div class="d-flex justify-content-center">
+  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-sm">Add</button>
+</div>
+
+<!-- Small modal -->
+<!-- Add nomenclature -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter name" [formControl]="name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveNomenclature()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update nomenclature -->
+<div class="modal fade bd-update-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="UpdateName">Name</label>
+          <input type="text" class="form-control" id="UpdateName" placeholder="Enter name" [formControl]="updateName">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateNomenclature()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

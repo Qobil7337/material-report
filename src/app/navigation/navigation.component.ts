@@ -10,27 +10,5 @@ export class NavigationComponent {
 
   constructor(private router: Router) {
   }
-  onClickToNomenclature() {
-    this.router.navigate(['/nomenclature'])
-  }
 
-  onClickToCalculation() {
-    this.router.navigate(['/calculation'])
-  }
-
-  onClickToGoodsInward() {
-    this.router.navigate(['/goods-inwards'])
-  }
-
-  onClickToSales() {
-    this.router.navigate(['/sales'])
-  }
-
-  onClickToRemainingStocks() {
-    this.router.navigate(['/remaining-stocks'])
-  }
-
-  onClickToMaterialReport() {
-    this.router.navigate(['/material-report'])
-  }
 }
