@@ -1,91 +1,68 @@
+<div class="container" *ngFor="let item of calculation; let i = index">
+  <div class="card">
+    <div class="card-header">
+      {{ item.dataCreated }}
 
-
-<div class="container">
-  <h3>Product name: Chicken sandwich</h3>
-  <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Unit</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
-      <th scope="col">Total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th scope="row">{{ 1 }}</th>
-      <td>Sandwich bread</td>
-      <td>pc</td>
-      <td>1</td>
-      <td>3000</td>
-      <td>3000</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ 2 }}</th>
-      <td>Chicken</td>
-      <td>kg</td>
-      <td>0.2</td>
-      <td>30000</td>
-      <td>6000</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ 3 }}</th>
-      <td>Tomato</td>
-      <td>kg</td>
-      <td>0.05</td>
-      <td>15000</td>
-      <td>750</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ 4 }}</th>
-      <td>Salad</td>
-      <td>kg</td>
-      <td>0.02</td>
-      <td>35000</td>
-      <td>700</td>
-    </tr>
-    <tr>
-      <th scope="row">{{ 5 }}</th>
-      <td>Tomato Sauce</td>
-      <td>litre</td>
-      <td>0.02</td>
-      <td>50000</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Total</td>
-      <td>11450</td>
-    </tr>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Price</td>
-      <td>35000</td>
-    </tr>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Gross profit</td>
-      <td>23550</td>
-    </tr>
-    <tr>
-      <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Gross profit margin</td>
-      <td>67%</td>
-    </tr>
-    </tbody>
-  </table>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ item.productName }}</h5>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
+    </div>
+  </div>
 </div>
+
+
+<!-- Modal -->
+<div *ngIf="selectedCalculation" class="modal wider-modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Calculation Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Product name: {{ selectedCalculation.productName }}</p>
+        <div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total sum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of selectedCalculation.nomenclatures; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ item.nomenclatureID }}</td>
+              <td>{{ item.nomenclatureName }}</td>
+              <td>{{ item.unitOfMeasure }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.totalSum }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Total Cost: {{ selectedCalculation.totalCost }}</p>
+        <p>Sale Price: {{ selectedCalculation.salePrice }}</p>
+        <p>Gross Profit: {{ selectedCalculation.grossProfit }}</p>
+        <p>Gross Profit Margin: {{ selectedCalculation.grossProfitMargin }}</p>
+        <!-- Add more details as needed -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- You can add additional actions here if needed -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
