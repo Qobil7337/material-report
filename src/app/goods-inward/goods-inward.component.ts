@@ -1,13 +1,33 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Nomenclature} from "../nomenclature/nomenclature.component";
+import {HttpClient} from "@angular/common/http";
 
+interface Food {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-goods-inward',
   templateUrl: './goods-inward.component.html',
   styleUrls: ['./goods-inward.component.css']
 })
-export class GoodsInwardComponent {
+export class GoodsInwardComponent  implements OnInit {
 
   selectedGoodsInwardsItem: any
+  nomenclatures: Nomenclature[]
+  private url = 'http://localhost:3000/nomenclature';
+
+
+
+  constructor(private http: HttpClient) {
+  }
+
+
+  ngOnInit(): void {
+
+  }
+
+
 
   goodsInwards = [
     {
@@ -93,5 +113,13 @@ export class GoodsInwardComponent {
   openModal(item: any) {
     this.selectedGoodsInwardsItem = item
     }
+
+
+  public loadNomenclatures() {
+    this.http.get<Nomenclature[]>(this.url).subscribe(data => {
+      this.nomenclatures = data;
+      console.log(this.nomenclatures)
+    });
+  }
 
 }

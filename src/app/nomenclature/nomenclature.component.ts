@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FormControl, FormGroup} from "@angular/forms";
 
-interface Nomenclature {
+export interface Nomenclature {
   id: number;
   name: string;
 }
@@ -19,13 +19,14 @@ export class NomenclatureComponent implements OnInit {
   public updateName = new FormControl(null)
   private selectedItemId: number;
 
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.loadNomenclatures();
   }
 
-  private loadNomenclatures() {
+  public loadNomenclatures() {
     this.http.get<Nomenclature[]>(this.url).subscribe(data => {
       this.nomenclature = data;
     });

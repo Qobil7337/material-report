@@ -9,3 +9,14 @@
   max-width: 80%; /* Adjust the percentage as needed */
 }
 
+nz-select {
+  width: 100%;
+}
+
+.custom-overlay {
+  position: fixed; /* Use 'fixed' positioning */
+  z-index: 1000; /* Set an appropriate z-index */
+}
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  z-index: 99999 !important;
+}

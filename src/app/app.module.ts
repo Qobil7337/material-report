@@ -12,7 +12,19 @@ import { RemainingStocksComponent } from './remaining-stocks/remaining-stocks.co
 import { MaterialReportComponent } from './material-report/material-report.component';
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule, FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import { GoodsInwardCreateComponent } from './goods-inward/goods-inward-create/goods-inward-create.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzSpinModule} from "ng-zorro-antd/spin";
+
 
 @NgModule({
   declarations: [
@@ -24,15 +36,26 @@ import {ReactiveFormsModule} from "@angular/forms";
     SalesComponent,
     RemainingStocksComponent,
     MaterialReportComponent,
-    HomeComponent
+    HomeComponent,
+    GoodsInwardCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatButtonModule,
+    NzSelectModule,
+    NzSpinModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
