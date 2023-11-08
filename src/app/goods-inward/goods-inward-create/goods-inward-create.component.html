@@ -1,6 +1,6 @@
 <h3 style="text-align: center">GoodsInwards</h3>
 <div class="container">
-  <form>
+  <form [formGroup]="goodsInwardsForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <div class="row">
         <div class="col-2">
@@ -9,7 +9,7 @@
         <div class="col-3">
           <mat-form-field>
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <input formControlName="date" matInput [matDatepicker]="picker">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -23,7 +23,7 @@
           <label for="inputSupplier">Supplier:</label>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" id="inputSupplier">
+          <input formControlName="supplier" type="text" class="form-control form-control-sm" id="inputSupplier">
         </div>
       </div>
     </div>
@@ -33,18 +33,18 @@
           <label for="inputWarehouse">Warehouse:</label>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control form-control-sm" id="inputWarehouse">
+          <input formControlName="warehouse" type="text" class="form-control form-control-sm" id="inputWarehouse">
         </div>
       </div>
     </div>
     <div class="form-group">
       <div class="row">
         <div class="col-2">
-          <label for="inputWarehouse">Nomenclature:</label>
+          <label>Nomenclature:</label>
         </div>
         <div class="col-4">
           <nz-select
-            [(ngModel)]="selectedNomenclature" name="selectedNomenclature"
+            [(ngModel)]="selectedNomenclature" [ngModelOptions]="{standalone: true}" name="selectedNomenclature"
             nzPlaceHolder="Select nomenclature"
             nzAllowClear
           >
@@ -79,12 +79,18 @@
             <select class="form-control form-control-sm">
               <option value="1">kg</option>
               <option value="2">pc</option>
-              <option value="3">Lt</option>
+              <option value="3">lt</option>
             </select>
           </td>
-          <td class="col-1"><input class="form-control form-control-sm"></td>
-          <td class="col-2"><input class="form-control form-control-sm"></td>
-          <td>{{ 50000 }}</td>
+          <td class="col-1">
+            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="quantity[i]" [ngModelOptions]="{standalone: true}" name="quantity" (ngModelChange)="updateTotal(i)">
+          </td>
+          <td class="col-2">
+            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="price[i]" [ngModelOptions]="{standalone: true}" name="price" (ngModelChange)="updateTotal(i)">
+          </td>
+          <td class="col-2">
+            <span class="form-control form-control-sm">{{ total[i] }}</span>
+          </td>
         </tr>
         </tbody>
       </table>

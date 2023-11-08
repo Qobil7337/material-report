@@ -4,7 +4,7 @@
       {{ item.dateOfDelivery }}
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ item.totalSum }} $</h5>
+      <h4 class="card-title">{{ item.totalSum }} $</h4>
       <p class="card-text">Supplier: {{ item.supplier }}.</p>
       <p class="card-text">Warehouse: {{ item.warehouse }}.</p>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
