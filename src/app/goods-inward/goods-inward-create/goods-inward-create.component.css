@@ -1,6 +1,6 @@
 .container {
   margin-top: 20px;
-  width: 50%;
+  width: 60%;
 }
 
 nz-select {
@@ -13,4 +13,8 @@ nz-select {
 
 table {
   width: 100%;
+}
+
+input.ng-invalid.ng-touched:not(#dateInput) {
+  border: 1px solid red;
 }

@@ -1,63 +1,46 @@
-<h3 style="text-align: center">GoodsInwards</h3>
+<h3 style="text-align: center">Goods Inwards</h3>
 <div class="container">
   <form [formGroup]="goodsInwardsForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <label>Date:</label>
+            </div>
+            <div class="col-3">
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input formControlName="date" id="dateInput" matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <span *ngIf="!goodsInwardsForm.get('date')?.valid && goodsInwardsForm.get('date')?.touched">Please choose a date!</span>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <label for="supplier">Supplier:</label>
+            </div>
+            <div class="col-4">
+              <input formControlName="supplier" type="text" class="form-control form-control-sm" id="supplier">
+              <span class="help-block" *ngIf="!goodsInwardsForm.get('supplier')?.valid && goodsInwardsForm.get('supplier')?.touched">Please specify a supplier</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <label for="warehouse">Warehouse:</label>
+            </div>
+            <div class="col-4">
+              <input formControlName="warehouse" type="text" class="form-control form-control-sm" id="warehouse">
+              <span class="help-block" *ngIf="!goodsInwardsForm.get('warehouse')?.valid && goodsInwardsForm.get('warehouse')?.touched">Please specify a warehouse</span>
+            </div>
+          </div>
+        </div>
     <div class="form-group">
-      <div class="row">
-        <div class="col-2">
-          <label>Date:</label>
-        </div>
-        <div class="col-3">
-          <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input formControlName="date" matInput [matDatepicker]="picker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-2">
-          <label for="inputSupplier">Supplier:</label>
-        </div>
-        <div class="col-4">
-          <input formControlName="supplier" type="text" class="form-control form-control-sm" id="inputSupplier">
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-2">
-          <label for="inputWarehouse">Warehouse:</label>
-        </div>
-        <div class="col-4">
-          <input formControlName="warehouse" type="text" class="form-control form-control-sm" id="inputWarehouse">
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-2">
-          <label>Nomenclature:</label>
-        </div>
-        <div class="col-4">
-          <nz-select
-            [(ngModel)]="selectedNomenclature" [ngModelOptions]="{standalone: true}" name="selectedNomenclature"
-            nzPlaceHolder="Select nomenclature"
-            nzAllowClear
-          >
-            <nz-option *ngFor="let nomenclature of nomenclatures" [nzValue]="nomenclature" [nzLabel]="nomenclature.name"></nz-option>
-          </nz-select>
-        </div>
-        <div class="col-4">
-          <button type="button" class="btn btn-success btn-sm" (click)="onAddNomenclature()">Add</button>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="nomenclatureIsAddedToTable">
       <table class="table">
         <thead>
         <tr>
@@ -67,37 +50,356 @@
           <th scope="col">Unit</th>
           <th scope="col">Quantity</th>
           <th scope="col">Price</th>
-          <th scope="col">Total sum</th>
+          <th scope="col">Sum</th>
         </tr>
         </thead>
-        <tbody *ngFor="let selectedNomenclature of selectedNomenclatures; let i = index">
-        <tr>
+        <tbody formArrayName="goodsInwardsItems">
+        <tr *ngFor="let goodsInwardsItem of goodsInwardsItems.controls; let i=index" [formGroupName]="i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ selectedNomenclature.id }}</td>
-          <td>{{ selectedNomenclature.name }}</td>
-          <td class="col-1">
-            <select class="form-control form-control-sm">
-              <option value="1">kg</option>
-              <option value="2">pc</option>
-              <option value="3">lt</option>
+          <td>
+            <input class="form-control form-control-sm col-4" formControlName="nomenclatureID">
+          </td>
+          <td>
+            <nz-select
+              formControlName="nomenclatureName"
+              nzPlaceHolder="Select nomenclature"
+              nzAllowClear
+              (ngModelChange)="updateNomenclatureId(i)"
+            >
+              <nz-option *ngFor="let nomenclature of nomenclatures" [nzValue]="nomenclature.name" [nzLabel]="nomenclature.name"></nz-option>
+            </nz-select>
+          </td>
+          <td>
+            <select class="form-control form-control-sm" formControlName="unit">
+              <option value="kg">kg</option>
+              <option value="pc">pc</option>
+              <option value="lt">lt</option>
             </select>
           </td>
-          <td class="col-1">
-            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="quantity[i]" [ngModelOptions]="{standalone: true}" name="quantity" (ngModelChange)="updateTotal(i)">
+          <td>
+            <input class="form-control form-control-sm col-5" formControlName="quantity">
           </td>
-          <td class="col-2">
-            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="price[i]" [ngModelOptions]="{standalone: true}" name="price" (ngModelChange)="updateTotal(i)">
+          <td>
+            <input class="form-control form-control-sm col-7" formControlName="price">
           </td>
-          <td class="col-2">
-            <span class="form-control form-control-sm">{{ total[i] }}</span>
+          <td>
+            <input class="form-control form-control-sm" formControlName="sum">
           </td>
         </tr>
         </tbody>
       </table>
+
+      <div class="col-4">
+        <button type="button" class="btn btn-success btn-sm" (click)="addGoodsInwardsItem()">Add</button>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm">Create</button>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label for="supplier">Total sum:</label>
+        </div>
+        <div class="col-2">
+          <input formControlName="totalSum" type="text" class="form-control form-control-sm" id="totalSum">
+        </div>
+      </div>
+    </div>
+        <button type="submit" class="btn btn-primary btn-sm" [disabled]="!goodsInwardsForm.valid">Create</button>
   </form>
 </div>
+
+
+
+<!--<h3 style="text-align: center">Goods Inwards</h3>-->
+<!--<div class="container">-->
+<!--  <form [formGroup]="goodsInwardsForm" (ngSubmit)="onSubmit()">-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label>Date:</label>-->
+<!--        </div>-->
+<!--        <div class="col-3">-->
+<!--          <mat-form-field>-->
+<!--            <mat-label>Choose a date</mat-label>-->
+<!--            <input formControlName="date" id="dateInput" matInput [matDatepicker]="picker">-->
+<!--            <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--            <span *ngIf="!goodsInwardsForm.get('date')?.valid && goodsInwardsForm.get('date')?.touched">Please choose a date!</span>-->
+<!--            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--            <mat-datepicker #picker></mat-datepicker>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label for="inputSupplier">Supplier:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <input formControlName="supplier" type="text" class="form-control form-control-sm" id="inputSupplier">-->
+<!--          <span class="help-block" *ngIf="!goodsInwardsForm.get('supplier')?.valid && goodsInwardsForm.get('supplier')?.touched">Please specify a supplier</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label for="inputWarehouse">Warehouse:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <input formControlName="warehouse" type="text" class="form-control form-control-sm" id="inputWarehouse">-->
+<!--          <span class="help-block" *ngIf="!goodsInwardsForm.get('warehouse')?.valid && goodsInwardsForm.get('warehouse')?.touched">Please specify a warehouse</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label>Nomenclature:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <nz-select-->
+<!--            [(ngModel)]="selectedNomenclature" [ngModelOptions]="{standalone: true}" name="selectedNomenclature"-->
+<!--            nzPlaceHolder="Select nomenclature"-->
+<!--            nzAllowClear-->
+<!--          >-->
+<!--            <nz-option *ngFor="let nomenclature of nomenclatures" [nzValue]="nomenclature" [nzLabel]="nomenclature.name"></nz-option>-->
+<!--          </nz-select>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <button type="button" class="btn btn-success btn-sm" (click)="onAddNomenclature()">Add</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div *ngIf="nomenclatureIsAddedToTable">-->
+<!--      <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th scope="col">#</th>-->
+<!--          <th scope="col">ID</th>-->
+<!--          <th scope="col">Name</th>-->
+<!--          <th scope="col">Unit</th>-->
+<!--          <th scope="col">Quantity</th>-->
+<!--          <th scope="col">Price</th>-->
+<!--          <th scope="col">Total sum</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody *ngFor="let selectedNomenclature of selectedNomenclatures; let i = index">-->
+<!--        <tr>-->
+<!--          <th scope="row">{{ i + 1 }}</th>-->
+<!--          <td>{{ selectedNomenclature.id }}</td>-->
+<!--          <td>{{ selectedNomenclature.name }}</td>-->
+<!--          <td class="col-1">-->
+<!--            <select class="form-control form-control-sm">-->
+<!--              <option value="1">kg</option>-->
+<!--              <option value="2">pc</option>-->
+<!--              <option value="3">lt</option>-->
+<!--            </select>-->
+<!--          </td>-->
+<!--          <td class="col-1">-->
+<!--            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="quantity[i]" [ngModelOptions]="{standalone: true}" name="quantity" (ngModelChange)="updateTotal(i)">-->
+<!--          </td>-->
+<!--          <td class="col-2">-->
+<!--            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="price[i]" [ngModelOptions]="{standalone: true}" name="price" (ngModelChange)="updateTotal(i)">-->
+<!--          </td>-->
+<!--          <td class="col-2">-->
+<!--            <span class="form-control form-control-sm">{{ total[i] }}</span>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--    <span style="display: block" class="help-block" *ngIf="!goodsInwardsForm.valid && goodsInwardsForm.touched">Please enter valid data</span>-->
+<!--    <button type="submit" class="btn btn-primary btn-sm">Create</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+<!--WORKING CODE-->
+<!--<div class="container">-->
+<!--  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">-->
+<!--    <label for="first-name">First Name: </label>-->
+<!--    <input id="first-name" type="text" formControlName="firstName" class="form-control form-control-sm">-->
+<!--    <label for="last-name">Last Name: </label>-->
+<!--    <input id="last-name" type="text" formControlName="lastName" class="form-control form-control-sm">-->
+<!--    <div formGroupName="address">-->
+<!--      <h2>Address</h2>-->
+<!--      <label for="street">Street: </label>-->
+<!--      <input id="street" type="text" formControlName="street" class="form-control form-control-sm">-->
+<!--      <label for="city">City: </label>-->
+<!--      <input id="city" type="text" formControlName="city" class="form-control form-control-sm">-->
+<!--      <label for="state">State: </label>-->
+<!--      <input id="state" type="text" formControlName="state" class="form-control form-control-sm">-->
+<!--      <label for="zip">Zip Code: </label>-->
+<!--      <input id="zip" type="text" formControlName="zip" class="form-control form-control-sm">-->
+<!--    </div>-->
+<!--    <div formArrayName="aliases">-->
+<!--      <h2>Aliases</h2>-->
+<!--      <button type="button" (click)="addAlias()">+ Add another alias</button>-->
+<!--      <div *ngFor="let alias of aliases.controls; let i=index" [formGroupName]="i">-->
+<!--        <label for="aliasName">Alias Name:</label>-->
+<!--        <input id="aliasName" type="text" formControlName="aliasName" class="form-control form-control-sm">-->
+<!--        <label for="aliasValue">Alias Value:</label>-->
+<!--        <input id="aliasValue" type="text" formControlName="aliasValue" class="form-control form-control-sm">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <p>Complete the form to enable the button.</p>-->
+<!--    <button type="submit" [disabled]="!profileForm.valid" class="btn btn-sm btn-primary">Submit</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+
+<!--<div class="container">-->
+<!-- <form [formGroup]="goodsInwardsForm" (ngSubmit)="onSubmit()">-->
+<!--   <label>Date</label>-->
+<!--     <input class="form-control form-control-sm" formControlName="date">-->
+<!--   <label>Supplier</label>-->
+<!--     <input class="form-control form-control-sm" formControlName="supplier">-->
+<!--   <label>Warehouse</label>-->
+<!--     <input class="form-control form-control-sm" formControlName="warehouse">-->
+<!--   <div>-->
+<!--     <table *ngIf="!showTable">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                        <th scope="col">#</th>-->
+<!--                        <th scope="col">ID</th>-->
+<!--                        <th scope="col">Name</th>-->
+<!--                        <th scope="col">Unit</th>-->
+<!--                        <th scope="col">Quantity</th>-->
+<!--                        <th scope="col">Price</th>-->
+<!--                        <th scope="col">Total sum</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--       <tbody formArrayName="goodsInwardsItems">-->
+<!--            <tr formGroupName="item">-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="nomenclatureID"></td>-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="nomenclatureName"></td>-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="unit"></td>-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="quantity"></td>-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="price"></td>-->
+<!--                        <td><input class="form-control form-control-sm" formControlName="sum"></td>-->
+<!--            </tr>-->
+<!--       </tbody>-->
+<!--     </table>-->
+<!--   </div>-->
+<!--   <button type="submit" class="btn btn-sm btn-primary">Save</button>-->
+<!-- </form>-->
+<!--</div>-->
+
+<!--<h3 style="text-align: center">Goods Inwards</h3>-->
+<!--<div class="container">-->
+<!--  <form [formGroup]="goodsInwardsForm" (ngSubmit)="onSubmit()">-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label>Date:</label>-->
+<!--        </div>-->
+<!--        <div class="col-3">-->
+<!--          <mat-form-field>-->
+<!--            <mat-label>Choose a date</mat-label>-->
+<!--            <input formControlName="date" id="dateInput" matInput [matDatepicker]="picker">-->
+<!--            <mat-hint>MM/DD/YYYY</mat-hint>-->
+<!--            <span *ngIf="!goodsInwardsForm.get('date')?.valid && goodsInwardsForm.get('date')?.touched">Please choose a date!</span>-->
+<!--            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--            <mat-datepicker #picker></mat-datepicker>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label for="inputSupplier">Supplier:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <input formControlName="supplier" type="text" class="form-control form-control-sm" id="inputSupplier">-->
+<!--          <span class="help-block" *ngIf="!goodsInwardsForm.get('supplier')?.valid && goodsInwardsForm.get('supplier')?.touched">Please specify a supplier</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label for="inputWarehouse">Warehouse:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <input formControlName="warehouse" type="text" class="form-control form-control-sm" id="inputWarehouse">-->
+<!--          <span class="help-block" *ngIf="!goodsInwardsForm.get('warehouse')?.valid && goodsInwardsForm.get('warehouse')?.touched">Please specify a warehouse</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="row">-->
+<!--        <div class="col-2">-->
+<!--          <label>Nomenclature:</label>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <nz-select-->
+<!--            [(ngModel)]="selectedNomenclature" [ngModelOptions]="{standalone: true}" name="selectedNomenclature"-->
+<!--            nzPlaceHolder="Select nomenclature"-->
+<!--            nzAllowClear-->
+<!--          >-->
+<!--            <nz-option *ngFor="let nomenclature of nomenclatures" [nzValue]="nomenclature" [nzLabel]="nomenclature.name"></nz-option>-->
+<!--          </nz-select>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--          <button type="button" class="btn btn-success btn-sm" (click)="onAddNomenclature()">Add</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div *ngIf="nomenclatureIsAddedToTable">-->
+<!--      <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th scope="col">#</th>-->
+<!--          <th scope="col">ID</th>-->
+<!--          <th scope="col">Name</th>-->
+<!--          <th scope="col">Unit</th>-->
+<!--          <th scope="col">Quantity</th>-->
+<!--          <th scope="col">Price</th>-->
+<!--          <th scope="col">Total sum</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody *ngFor="let selectedNomenclature of selectedNomenclatures; let i = index">-->
+<!--        <tr>-->
+<!--          <th scope="row">{{ i + 1 }}</th>-->
+<!--          <td>{{ selectedNomenclature.id }}</td>-->
+<!--          <td>{{ selectedNomenclature.name }}</td>-->
+<!--          <td class="col-1">-->
+<!--            <select class="form-control form-control-sm">-->
+<!--              <option value="1">kg</option>-->
+<!--              <option value="2">pc</option>-->
+<!--              <option value="3">lt</option>-->
+<!--            </select>-->
+<!--          </td>-->
+<!--          <td class="col-1">-->
+<!--            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="quantity[i]" [ngModelOptions]="{standalone: true}" name="quantity" (ngModelChange)="updateTotal(i)">-->
+<!--          </td>-->
+<!--          <td class="col-2">-->
+<!--            <input autocomplete="off" class="form-control form-control-sm" [(ngModel)]="price[i]" [ngModelOptions]="{standalone: true}" name="price" (ngModelChange)="updateTotal(i)">-->
+<!--          </td>-->
+<!--          <td class="col-2">-->
+<!--            <span class="form-control form-control-sm">{{ total[i] }}</span>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--    <span style="display: block" class="help-block" *ngIf="!goodsInwardsForm.valid && goodsInwardsForm.touched">Please enter valid data</span>-->
+<!--    <button type="submit" class="btn btn-primary btn-sm">Create</button>-->
+<!--  </form>-->
+<!--</div>-->
 
 
 
