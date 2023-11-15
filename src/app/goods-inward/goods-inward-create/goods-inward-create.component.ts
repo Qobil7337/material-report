@@ -102,7 +102,8 @@ export class GoodsInwardCreateComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.goodsInwardsForm.value)
+    const formData = this.goodsInwardsForm.value
+    console.log(formData)
     this.router.navigate(['goods-inwards'])
   }
 
@@ -121,6 +122,10 @@ export class GoodsInwardCreateComponent implements OnInit{
       // @ts-ignore
       this.goodsInwardsItems.at(index).get('nomenclatureID').setValue(selectedNomenclature.id);
     }
+  }
+
+  removeFormGroup(index: number) {
+    this.goodsInwardsItems.removeAt(index)
   }
 
 
