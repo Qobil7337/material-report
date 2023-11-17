@@ -13,8 +13,10 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ item.id }}</td>
       <td>{{ item.name }}</td>
-      <button type="button" class=" btn btn-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
-      <button type="button" class=" btn btn-success btn-sm" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
+      <td>
+        <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
+        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
+      </td>
     </tr>
     </tbody>
   </table>

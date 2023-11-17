@@ -1,13 +1,14 @@
 <div class="container" *ngFor="let item of goodsInwards; let i = index">
   <div class="card">
     <div class="card-header">
-      {{ item.dateOfDelivery }}
+      {{ item.date }}
     </div>
     <div class="card-body">
       <h4 class="card-title">{{ item.totalSum }} $</h4>
       <p class="card-text">Supplier: {{ item.supplier }}.</p>
       <p class="card-text">Warehouse: {{ item.warehouse }}.</p>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
+      <button type="button" class="btn btn-outline-danger" (click)="deleteGoodsInwards(item)">Delete</button>
     </div>
   </div>
 </div>
@@ -26,7 +27,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Date of Delivery: {{ selectedGoodsInwardsItem.dateOfDelivery }}</p>
+        <p>Date of Delivery: {{ selectedGoodsInwardsItem.date }}</p>
         <p>Supplier: {{ selectedGoodsInwardsItem.supplier }}</p>
         <p>Warehouse: {{ selectedGoodsInwardsItem.warehouse }}</p>
           <div>
@@ -43,14 +44,14 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let item of selectedGoodsInwardsItem.goodsInwardsItem; let i = index">
+              <tr *ngFor="let item of selectedGoodsInwardsItem.goodsInwardsItems; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
-                <td>{{ item.nomenclatureID }}</td>
-                <td>{{ item.nomenclatureName }}</td>
+                <td>{{ item.nomenclature.id }}</td>
+                <td>{{ item.nomenclature.name }}</td>
                 <td>{{ item.unitOfMeasure }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.price }}</td>
-                <td>{{ item.totalSum }}</td>
+                <td>{{ item.sum }}</td>
               </tr>
               </tbody>
             </table>

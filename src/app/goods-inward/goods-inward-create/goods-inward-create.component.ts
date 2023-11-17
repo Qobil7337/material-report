@@ -15,6 +15,7 @@ export class GoodsInwardCreateComponent implements OnInit{
   goodsInwardsForm: FormGroup
   nomenclatures: Nomenclature[]
   url = 'http://localhost:3000/nomenclature'
+  urlCreate = 'http://localhost:3000/goods-inwards'
   showTable = false
 
   constructor(private fb: FormBuilder,
@@ -104,7 +105,10 @@ export class GoodsInwardCreateComponent implements OnInit{
   onSubmit() {
     const formData = this.goodsInwardsForm.value
     console.log(formData)
-    this.router.navigate(['goods-inwards'])
+    this.http.post(this.urlCreate, formData).subscribe(() => {
+      this.router.navigate(['goods-inwards'])
+    })
+
   }
 
     loadNomenclatures() {
