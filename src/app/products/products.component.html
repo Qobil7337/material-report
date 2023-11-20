@@ -1,0 +1,71 @@
+<div class="container" *ngFor="let item of goodsInwards; let i = index">
+  <div class="card">
+    <div class="card-header">
+      {{ item.date }}
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">{{ item.totalSum }} $</h4>
+      <p class="card-text">Supplier: {{ item.supplier }}.</p>
+      <p class="card-text">Warehouse: {{ item.warehouse }}.</p>
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
+      <button type="button" class="btn btn-outline-danger" (click)="deleteGoodsInwards(item)">Delete</button>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <button style="text-align: center" type="button" class="btn btn-success btn-sm" routerLink="/product-create">Add</button>
+</div>
+
+<!-- Modal -->
+<div *ngIf="selectedGoodsInwardsItem" class="modal wider-modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Goods Inwards Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Date of Delivery: {{ selectedGoodsInwardsItem.date }}</p>
+        <p>Supplier: {{ selectedGoodsInwardsItem.supplier }}</p>
+        <p>Warehouse: {{ selectedGoodsInwardsItem.warehouse }}</p>
+        <div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total sum</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of selectedGoodsInwardsItem.goodsInwardsItems; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ item.nomenclature.id }}</td>
+              <td>{{ item.nomenclature.name }}</td>
+              <td>{{ item.unitOfMeasure }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.sum }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Total Sum: {{ selectedGoodsInwardsItem.totalSum }} $</p>
+        <!-- Add more details as needed -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- You can add additional actions here if needed -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

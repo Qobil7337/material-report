@@ -24,6 +24,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzSpinModule} from "ng-zorro-antd/spin";
+import { ProductsComponent } from './products/products.component';
+import { ProductCreateComponent } from './products/product-create/product-create.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import {NzSpinModule} from "ng-zorro-antd/spin";
     RemainingStocksComponent,
     MaterialReportComponent,
     HomeComponent,
-    GoodsInwardCreateComponent
+    GoodsInwardCreateComponent,
+    ProductsComponent,
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,

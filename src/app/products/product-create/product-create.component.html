@@ -1,0 +1,152 @@
+<h3 style="text-align: center">Product</h3>
+<div class="container">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Date:</label>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Choose a date</mat-label>
+            <input formControlName="date" id="dateInput" matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <span *ngIf="!productForm.get('date')?.valid && productForm.get('date')?.touched">Please choose a date!</span>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label for="name">Name:</label>
+        </div>
+        <div class="col-4">
+          <input formControlName="name" type="text" class="form-control form-control-sm" id="name">
+          <span class="help-block" *ngIf="!productForm.get('name')?.valid && productForm.get('name')?.touched">Please specify a name</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Category:</label>
+        </div>
+        <div class="col-4">
+          <select class="form-control form-control-sm" formControlName="category">
+            <option value="burgers">Burgers</option>
+            <option value="pizza">Pizza</option>
+            <option value="drinks">Drinks</option>
+            <option value="hotDrinks">Hot Drinks</option>
+            <option value="sandwich">Sandwich</option>
+            <option value="spinner">Spinner</option>
+            <option value="desserts">Desserts</option>
+            <option value="soups">Soups</option>
+            <option value="salads">Salads</option>
+            <option value="appetizers">Appetizers</option>
+            <option value="iceCream">Ice Cream</option>
+            <option value="sauce">Sauce</option>
+          </select>
+          <span class="help-block" *ngIf="!productForm.get('category')?.valid && productForm.get('category')?.touched">Please specify a category</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Unit</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Sum</th>
+        </tr>
+        </thead>
+        <tbody formArrayName="inventoryItems">
+        <tr *ngFor="let inventoryItems of inventoryItems.controls; let i=index" [formGroupName]="i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <input class="form-control form-control-sm col-4" formControlName="nomenclatureID">
+          </td>
+          <td>
+            <nz-select
+              formControlName="nomenclatureName"
+              nzPlaceHolder="Select nomenclature"
+              nzAllowClear
+              (ngModelChange)="updateNomenclatureId(i)"
+            >
+              <nz-option *ngFor="let nomenclature of nomenclatures" [nzValue]="nomenclature.name" [nzLabel]="nomenclature.name"></nz-option>
+            </nz-select>
+          </td>
+          <td>
+            <select class="form-control form-control-sm" formControlName="unit">
+              <option value="kg">kg</option>
+              <option value="piece">pc</option>
+              <option value="litre">lt</option>
+            </select>
+          </td>
+          <td>
+            <input class="form-control form-control-sm col-5" formControlName="quantity">
+          </td>
+          <td>
+            <input class="form-control form-control-sm col-7" formControlName="price">
+          </td>
+          <td>
+            <input class="form-control form-control-sm" formControlName="sum">
+          </td>
+          <td><button type="button" class="btn btn-sm btn-danger" (click)="removeFormGroup(i)">Remove</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="col-4">
+        <button type="button" class="btn btn-success btn-sm" (click)="addInventoryItem()">Add</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Total Cost:</label>
+        </div>
+        <div class="col-2">
+          <input formControlName="totalCost" type="text" class="form-control form-control-sm" id="totalCost">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Price: </label>
+        </div>
+        <div class="col-2">
+          <input formControlName="salePrice" type="text" class="form-control form-control-sm" id="SalePrice">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Gross Profit: </label>
+        </div>
+        <div class="col-2">
+          <input formControlName="grossProfit" type="text" class="form-control form-control-sm" id="grossProfit">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-2">
+          <label>Gross Profit Margin: </label>
+        </div>
+        <div class="col-2">
+          <input formControlName="grossProfitMargin" type="text" class="form-control form-control-sm" id="grossProfitMargin">
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm" [disabled]="!productForm.valid">Create</button>
+  </form>
+</div>
