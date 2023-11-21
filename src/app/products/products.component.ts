@@ -1,7 +1,28 @@
 import { Component } from '@angular/core';
 import {Nomenclature} from "../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
-import {GoodsInwards} from "../goods-inward/goods-inward.component";
+import {Unit} from "../goods-inward/goods-inward.component";
+
+
+export interface Products {
+  date: Date
+  name: string
+  category: string
+  productItem: [
+    {
+      nomenclatureID: number,
+      nomenclatureName: string,
+      unit: Unit,
+      quantity: number,
+      price: number,
+      sum: number
+    }
+  ]
+  totalCost: number
+  salePrice: number
+  grossProfit: number
+  grossProfitMargin: number
+}
 
 @Component({
   selector: 'app-products',
@@ -10,44 +31,42 @@ import {GoodsInwards} from "../goods-inward/goods-inward.component";
 })
 export class ProductsComponent {
 
-  selectedGoodsInwardsItem: any
+  selectedProductItem: any
   nomenclatures: Nomenclature[]
-  private url = 'http://localhost:3000/nomenclature';
-  private urlGoodsInwards = 'http://localhost:3000/goods-inwards';
-  goodsInwards: GoodsInwards[] = [];
+  private urlNomenclature = 'http://localhost:3000/nomenclature';
+  private urlProduct = 'http://localhost:3000/product';
+  products: Products[] = [];
 
   constructor(private http: HttpClient) {
   }
 
 
   ngOnInit(): void {
-    this.loadGoodsInwards()
+    this.loadProducts()
   }
 
-  loadGoodsInwards() {
-    this.http.get<GoodsInwards[]>(this.urlGoodsInwards).subscribe((data) => {
-      this.goodsInwards = data
+  loadProducts() {
+    this.http.get<Products[]>(this.urlProduct).subscribe((data) => {
+      this.products = data
     })
   }
 
   openModal(item: any) {
-    this.selectedGoodsInwardsItem = item
+    this.selectedProductItem = item
   }
 
 
   public loadNomenclatures() {
-    this.http.get<Nomenclature[]>(this.url).subscribe(data => {
-      console.log(data)
+    this.http.get<Nomenclature[]>(this.urlNomenclature).subscribe(data => {
       this.nomenclatures = data;
-      console.log(this.nomenclatures)
     });
   }
 
-  deleteGoodsInwards(item: any) {
+  deleteProduct(item: any) {
     const id = item.id
-    const url = `http://localhost:3000/goods-inwards/${id}`
+    const url = `http://localhost:3000/product/${id}`
     this.http.delete(url).subscribe(() => {
-      this.loadGoodsInwards()
+      this.loadProducts()
     })
   }
 }

@@ -9,6 +9,7 @@ import {MaterialReportComponent} from "./material-report/material-report.compone
 import {GoodsInwardCreateComponent} from "./goods-inward/goods-inward-create/goods-inward-create.component";
 import {ProductsComponent} from "./products/products.component";
 import {ProductCreateComponent} from "./products/product-create/product-create.component";
+import {WarehouseComponent} from "./warehouse/warehouse.component";
 
 const routes: Routes = [
   {path: 'nomenclature', component: NomenclatureComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'material-report', component: MaterialReportComponent},
   {path: 'goods-inwards-create', component: GoodsInwardCreateComponent},
   {path: 'products', component: ProductsComponent},
-  {path: 'product-create', component: ProductCreateComponent}
+  {path: 'product-create', component: ProductCreateComponent},
+  {path: 'warehouse', component: WarehouseComponent}
 ];
 
 @NgModule({

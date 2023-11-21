@@ -13,7 +13,7 @@ export class ProductCreateComponent {
   productForm: FormGroup
   nomenclatures: Nomenclature[]
   url = 'http://localhost:3000/nomenclature'
-  urlCreate = 'http://localhost:3000/goods-inwards'
+  urlCreate = 'http://localhost:3000/product'
   showTable = false
 
   constructor(private fb: FormBuilder,
@@ -26,8 +26,8 @@ export class ProductCreateComponent {
       date: ['', Validators.required],
       name: ['', Validators.required],
       category: ['', Validators.required],
-      inventoryItems: this.fb.array([
-        this.createInventoryItemsFormGroup()
+      productItem: this.fb.array([
+        this.createProductItemsFormGroup()
       ]),
       totalCost: ['', Validators.required],
       salePrice: ['', Validators.required],
@@ -41,7 +41,7 @@ export class ProductCreateComponent {
     let updatingGrossProfit = false;
 
     // Subscribe to changes in the form array to update sum
-    this.inventoryItems.valueChanges.subscribe(() => {
+    this.productItem.valueChanges.subscribe(() => {
       // Check if already updating, if so, return to avoid recursion
       if (updatingSum) {
         return;
@@ -82,14 +82,14 @@ export class ProductCreateComponent {
     // @ts-ignore
     const price = this.salePrice.value
     const grossProfit = (price - totalCost)
-    const grossProfitMargin = (((price - totalCost) / price) * 100).toFixed(2) + '%'
+    const grossProfitMargin = (((price - totalCost) / price) * 100).toFixed(2)
     this.productForm.get('grossProfit')?.setValue(grossProfit)
     this.productForm.get('grossProfitMargin')?.setValue(grossProfitMargin)
   }
   updateSum() {
     let totalCost = 0;
 
-    this.inventoryItems.controls.forEach((control) => {
+    this.productItem.controls.forEach((control) => {
       // @ts-ignore
       const quantity = control.get('quantity').value;
       // @ts-ignore
@@ -111,7 +111,7 @@ export class ProductCreateComponent {
   }
 
 
-  createInventoryItemsFormGroup(): FormGroup {
+  createProductItemsFormGroup(): FormGroup {
     return this.fb.group({
       nomenclatureID: [''],
       nomenclatureName: ['', Validators.required],
@@ -122,8 +122,8 @@ export class ProductCreateComponent {
     });
   }
 
-  get inventoryItems() {
-    return this.productForm.get('inventoryItems') as FormArray;
+  get productItem() {
+    return this.productForm.get('productItem') as FormArray;
   }
 
   get salePrice() {
@@ -131,8 +131,8 @@ export class ProductCreateComponent {
   }
 
 
-  addInventoryItem() {
-    this.inventoryItems.push(this.createInventoryItemsFormGroup());
+  addProductItem() {
+    this.productItem.push(this.createProductItemsFormGroup());
     this.showTable = true
   }
 
@@ -153,16 +153,16 @@ export class ProductCreateComponent {
 
   updateNomenclatureId(index: number): void {
     // @ts-ignore
-    const selectedNomenclatureName = this.inventoryItems.at(index).get('nomenclatureName').value;
+    const selectedNomenclatureName = this.productItem.at(index).get('nomenclatureName').value;
     const selectedNomenclature = this.nomenclatures.find(nomenclature => nomenclature.name === selectedNomenclatureName);
 
     if (selectedNomenclature) {
       // @ts-ignore
-      this.inventoryItems.at(index).get('nomenclatureID').setValue(selectedNomenclature.id);
+      this.productItem.at(index).get('nomenclatureID').setValue(selectedNomenclature.id);
     }
   }
 
   removeFormGroup(index: number) {
-    this.inventoryItems.removeAt(index)
+    this.productItem.removeAt(index)
   }
 }

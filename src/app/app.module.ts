@@ -26,6 +26,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzSpinModule} from "ng-zorro-antd/spin";
 import { ProductsComponent } from './products/products.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
+import { WarehouseComponent } from './warehouse/warehouse.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProductCreateComponent } from './products/product-create/product-create
     HomeComponent,
     GoodsInwardCreateComponent,
     ProductsComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    WarehouseComponent
   ],
   imports: [
     BrowserModule,

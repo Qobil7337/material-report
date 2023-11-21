@@ -36,18 +36,18 @@
         </div>
         <div class="col-4">
           <select class="form-control form-control-sm" formControlName="category">
-            <option value="burgers">Burgers</option>
-            <option value="pizza">Pizza</option>
-            <option value="drinks">Drinks</option>
-            <option value="hotDrinks">Hot Drinks</option>
-            <option value="sandwich">Sandwich</option>
-            <option value="spinner">Spinner</option>
-            <option value="desserts">Desserts</option>
-            <option value="soups">Soups</option>
-            <option value="salads">Salads</option>
-            <option value="appetizers">Appetizers</option>
-            <option value="iceCream">Ice Cream</option>
-            <option value="sauce">Sauce</option>
+            <option value="Burgers">Burgers</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Hot-Drinks">Hot Drinks</option>
+            <option value="Sandwich">Sandwich</option>
+            <option value="Spinner">Spinner</option>
+            <option value="Desserts">Desserts</option>
+            <option value="Soups">Soups</option>
+            <option value="Salads">Salads</option>
+            <option value="Appetizers">Appetizers</option>
+            <option value="IceCream">Ice Cream</option>
+            <option value="Sauce">Sauce</option>
           </select>
           <span class="help-block" *ngIf="!productForm.get('category')?.valid && productForm.get('category')?.touched">Please specify a category</span>
         </div>
@@ -66,8 +66,8 @@
           <th scope="col">Sum</th>
         </tr>
         </thead>
-        <tbody formArrayName="inventoryItems">
-        <tr *ngFor="let inventoryItems of inventoryItems.controls; let i=index" [formGroupName]="i">
+        <tbody formArrayName="productItem">
+        <tr *ngFor="let productItem of productItem.controls; let i=index" [formGroupName]="i">
           <th scope="row">{{ i + 1 }}</th>
           <td>
             <input class="form-control form-control-sm col-4" formControlName="nomenclatureID">
@@ -104,7 +104,7 @@
       </table>
 
       <div class="col-4">
-        <button type="button" class="btn btn-success btn-sm" (click)="addInventoryItem()">Add</button>
+        <button type="button" class="btn btn-success btn-sm" (click)="addProductItem()">Add</button>
       </div>
     </div>
     <div class="form-group">
