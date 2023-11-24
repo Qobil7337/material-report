@@ -18,3 +18,7 @@ table {
 input.ng-invalid.ng-touched:not(#dateInput) {
   border: 1px solid red;
 }
+
+.rounded {
+  width: 300px;
+}

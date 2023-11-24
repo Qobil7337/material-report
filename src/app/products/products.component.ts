@@ -8,6 +8,7 @@ export interface Products {
   date: Date
   name: string
   category: string
+  imageUrl: string
   productItem: [
     {
       nomenclatureID: number,
@@ -32,8 +33,6 @@ export interface Products {
 export class ProductsComponent {
 
   selectedProductItem: any
-  nomenclatures: Nomenclature[]
-  private urlNomenclature = 'http://localhost:3000/nomenclature';
   private urlProduct = 'http://localhost:3000/product';
   products: Products[] = [];
 
@@ -48,6 +47,7 @@ export class ProductsComponent {
   loadProducts() {
     this.http.get<Products[]>(this.urlProduct).subscribe((data) => {
       this.products = data
+      console.log(data)
     })
   }
 
@@ -55,12 +55,11 @@ export class ProductsComponent {
     this.selectedProductItem = item
   }
 
-
-  public loadNomenclatures() {
-    this.http.get<Nomenclature[]>(this.urlNomenclature).subscribe(data => {
-      this.nomenclatures = data;
-    });
+  formatNumberWithSpaceSeparator(value: number): string {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
+
+
 
   deleteProduct(item: any) {
     const id = item.id

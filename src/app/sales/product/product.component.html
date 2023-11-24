@@ -1,0 +1,19 @@
+<div class="card mb-3 mr-3" style="max-width: 10rem; padding: 15px; position: relative; ">
+  <img class="card-img-top img-thumbnail mx-auto" [src]="product.imageUrl" [alt]="product.name" style="width: 120px; height: 120px; object-fit: cover;">
+  <div class="card-body">
+    <p class="card-text">{{formatNumberWithSpaceSeparator(product.salePrice)}} сум</p>
+    <h4 style="font-size: 11px;" class="card-title">{{product.name}}</h4>
+    <div class="d-flex justify-content-center" *ngIf="!isClicked">
+      <button style="text-align: center; padding: 4px 8px; font-size: 12px;" class="btn btn-success" (click)="onAdd()">Add</button>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="isClicked && amount !== 0">
+      <div class="d-flex align-items-center flex-grow-1">
+        <button type="button" class="btn flex-grow-1" (click)="onDecrement()">-</button>
+        <span>{{ amount }}</span>
+        <button type="button" class="btn flex-grow-1" (click)="onIncrement()">+</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

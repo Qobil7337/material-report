@@ -4,10 +4,10 @@
       {{ item.date }}
     </div>
     <div class="card-body">
-      <h4 class="card-title">{{ item.totalSum }} $</h4>
+      <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.totalSum) }} $</h4>
       <p class="card-text">Supplier: {{ item.supplier }}.</p>
       <p class="card-text">Warehouse: {{ item.warehouse }}.</p>
-      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
+      <button style="margin-right: 5px" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
       <button type="button" class="btn btn-outline-danger" (click)="deleteGoodsInwards(item)">Delete</button>
     </div>
   </div>
@@ -50,13 +50,13 @@
                 <td>{{ item.nomenclature.name }}</td>
                 <td>{{ item.unitOfMeasure }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.sum }}</td>
+                <td>{{ formatNumberWithSpaceSeparator(item.price) }}</td>
+                <td>{{ formatNumberWithSpaceSeparator(item.sum) }}</td>
               </tr>
               </tbody>
             </table>
           </div>
-        <p>Total Sum: {{ selectedGoodsInwardsItem.totalSum }} $</p>
+        <p>Total Sum: {{ formatNumberWithSpaceSeparator(selectedGoodsInwardsItem.totalSum) }} $</p>
         <!-- Add more details as needed -->
       </div>
       <div class="modal-footer">

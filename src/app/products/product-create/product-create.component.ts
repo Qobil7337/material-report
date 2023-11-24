@@ -26,6 +26,7 @@ export class ProductCreateComponent {
       date: ['', Validators.required],
       name: ['', Validators.required],
       category: ['', Validators.required],
+      imageUrl: ['', Validators.required],
       productItem: this.fb.array([
         this.createProductItemsFormGroup()
       ]),
@@ -73,6 +74,10 @@ export class ProductCreateComponent {
 
       // Reset flag after updating
       updatingGrossProfit = false;
+    })
+
+    this.imageUrl.valueChanges.subscribe(() => {
+      console.log(this.imageUrl.value)
     })
 
   }
@@ -128,6 +133,10 @@ export class ProductCreateComponent {
 
   get salePrice() {
     return this.productForm.get('salePrice') as FormControl;
+  }
+
+  get imageUrl() {
+    return this.productForm.get('imageUrl') as FormControl;
   }
 
 

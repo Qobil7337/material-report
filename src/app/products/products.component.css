@@ -1,5 +1,5 @@
 .container {
-  width: 70%;
+  width: 50%;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -19,4 +19,15 @@ nz-select {
 }
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
   z-index: 99999 !important;
+}
+
+#price {
+  margin-bottom: 40px;
+}
+
+/* Add this to your global or component-specific styles */
+.fixed-size-image {
+  width: 200px; /* Set your desired fixed width */
+  height: 200px; /* Set your desired fixed height */
+  object-fit: cover; /* Choose 'cover' or 'contain' based on your preference */
 }

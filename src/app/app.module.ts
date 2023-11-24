@@ -27,6 +27,9 @@ import {NzSpinModule} from "ng-zorro-antd/spin";
 import { ProductsComponent } from './products/products.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { WarehouseComponent } from './warehouse/warehouse.component';
+import { ProductComponent } from './sales/product/product.component';
+import { CartComponent } from './sales/product/cart/cart.component';
+import { ProductInCartComponent } from './sales/product/cart/product-in-cart/product-in-cart.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
     GoodsInwardCreateComponent,
     ProductsComponent,
     ProductCreateComponent,
-    WarehouseComponent
+    WarehouseComponent,
+    ProductComponent,
+    CartComponent,
+    ProductInCartComponent
   ],
   imports: [
     BrowserModule,

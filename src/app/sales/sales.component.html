@@ -1,1 +1,80 @@
-<p>sales works!</p>
+<!--<div class="container-fluid">-->
+<!--  <div class="row">-->
+<!--    <nav class="col-md-2 d-none d-md-block sidebar">-->
+<!--      <div class="sidebar-sticky">-->
+<!--        <h2>Menu</h2>-->
+<!--        <ul class="nav flex-column">-->
+<!--          <li class="nav-item" (click)="scrollToSection('burgers')">-->
+<!--            <a class="nav-link">Burgers</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('pizza')">-->
+<!--            <a class="nav-link">Pizza</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('sandwich')">-->
+<!--            <a class="nav-link">Sandwich</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('salads')">-->
+<!--            <a class="nav-link">Salads</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('spinner')">-->
+<!--            <a class="nav-link">Spinner</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('drinks')">-->
+<!--            <a class="nav-link">Drinks</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('hot-drinks')">-->
+<!--            <a class="nav-link">Hot Drinks</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('desserts')">-->
+<!--            <a class="nav-link">Desserts</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('soups')">-->
+<!--            <a class="nav-link">Soups</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('appetizers')">-->
+<!--            <a class="nav-link">Appetizers</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('ice-cream')">-->
+<!--            <a class="nav-link">Ice Cream</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item" (click)="scrollToSection('sauce')">-->
+<!--            <a class="nav-link">Sauce</a>-->
+<!--          </li>-->
+<!--          &lt;!&ndash; Add more categories as needed &ndash;&gt;-->
+
+<!--          &lt;!&ndash; Example: Subcategories &ndash;&gt;-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+<!--    <main role="main" class="col-md-9 ml-md-auto col-lg-10 px-4" id="main">-->
+<!--      <section style="display: flex; flex-wrap: wrap;">-->
+<!--        <app-product *ngFor="let product of products" [product]="product"></app-product>-->
+<!--      </section>-->
+<!--    </main>-->
+<!--    <app-cart class="col-md-9 ml-md-auto col-lg-10 px-4" style="width: 40%"></app-cart>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <h1>Hello</h1>
+    </div>
+    <div class="col-7 d-flex justify-content-center">
+          <section style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <app-product *ngFor="let product of products" [product]="product"></app-product>
+          </section>
+    </div>
+    <div class="col-3">
+      <app-cart></app-cart>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
