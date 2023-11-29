@@ -10,6 +10,7 @@ import {GoodsInwardCreateComponent} from "./goods-inward/goods-inward-create/goo
 import {ProductsComponent} from "./products/products.component";
 import {ProductCreateComponent} from "./products/product-create/product-create.component";
 import {WarehouseComponent} from "./warehouse/warehouse.component";
+import {OrdersComponent} from "./orders/orders.component";
 
 const routes: Routes = [
   {path: 'nomenclature', component: NomenclatureComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'goods-inwards-create', component: GoodsInwardCreateComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'product-create', component: ProductCreateComponent},
-  {path: 'warehouse', component: WarehouseComponent}
+  {path: 'warehouse', component: WarehouseComponent},
+  {path: 'orders', component: OrdersComponent}
 ];
 
 @NgModule({

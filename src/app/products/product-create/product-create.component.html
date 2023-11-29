@@ -1,4 +1,4 @@
-<h3 style="text-align: center">Product</h3>
+<h3 style="text-align: center; margin-top: 60px">Product</h3>
 <div class="container">
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -46,7 +46,7 @@
             <option value="Soups">Soups</option>
             <option value="Salads">Salads</option>
             <option value="Appetizers">Appetizers</option>
-            <option value="IceCream">Ice Cream</option>
+            <option value="Ice-Cream">Ice Cream</option>
             <option value="Sauce">Sauce</option>
           </select>
           <span class="help-block" *ngIf="!productForm.get('category')?.valid && productForm.get('category')?.touched">Please specify a category</span>
@@ -162,6 +162,6 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-sm" [disabled]="!productForm.valid">Create</button>
+    <button id="createBtn" type="submit" class="btn btn-primary btn-sm" [disabled]="!productForm.valid">Create</button>
   </form>
 </div>

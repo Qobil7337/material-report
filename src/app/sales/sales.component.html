@@ -59,22 +59,65 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
-      <h1>Hello</h1>
+      <app-product-nav (categoryClick)="scrollToCategory($event)"></app-product-nav>
     </div>
     <div class="col-7 d-flex justify-content-center">
-          <section style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <app-product *ngFor="let product of products" [product]="product"></app-product>
+        <div >
+          <section id="burgers">
+              <app-product *ngFor="let product of burgersCategory" [product]="product" ></app-product>
           </section>
+          <section id="pizza">
+              <app-product *ngFor="let product of pizzaCategory" [product]="product" ></app-product>
+          </section>
+          <section id="sandwich">
+              <app-product *ngFor="let product of sandwichCategory" [product]="product" ></app-product>
+          </section>
+          <section id="salads">
+              <app-product *ngFor="let product of saladsCategory" [product]="product" ></app-product>
+          </section>
+          <section id="spinner">
+              <app-product *ngFor="let product of spinnerCategory" [product]="product" ></app-product>
+          </section>
+          <section id="drinks">
+              <app-product *ngFor="let product of drinksCategory" [product]="product" ></app-product>
+          </section>
+          <section id="hot-drinks">
+              <app-product *ngFor="let product of hotDrinksCategory" [product]="product" ></app-product>
+          </section>
+          <section id="desserts">
+              <app-product *ngFor="let product of dessertsCategory" [product]="product" ></app-product>
+          </section>
+          <section id="soups">
+              <app-product *ngFor="let product of soupsCategory" [product]="product" ></app-product>
+          </section>
+          <section id="appetizers">
+             <app-product *ngFor="let product of appetizersCategory" [product]="product" ></app-product>
+          </section>
+          <section id="ice-cream">
+             <app-product *ngFor="let product of iceCreamCategory" [product]="product" ></app-product>
+          </section>
+        <section id="sauce">
+          <app-product *ngFor="let product of sauceCategory" [product]="product" ></app-product>
+        </section>
+        </div>
     </div>
     <div class="col-3">
-      <app-cart></app-cart>
+      <app-cart (orderSaved)="onOrderSave()"></app-cart>
     </div>
 
   </div>
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
 
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="onOk()">&times;</span>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+      <h2 style="text-align: center;">Your order has been successfully saved. You can see all orders <button type="button" class="btn btn-primary" (click)="navigateToOrders()">Here</button></h2>
+    </div>
 
+  </div>
 
-
-
+</div>

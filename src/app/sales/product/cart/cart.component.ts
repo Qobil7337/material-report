@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProductDetails, ProductService} from "../../product.service";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -7,10 +9,14 @@ import {ProductDetails, ProductService} from "../../product.service";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-
+  @Output() orderSaved: EventEmitter<any> = new EventEmitter<any>()
   cartItems: ProductDetails[] = []
   total: number
-  constructor(private productService: ProductService) {}
+  urlOrder = 'http://localhost:3000/order'
+  @Output() clearCart: EventEmitter<any> = new EventEmitter<any>()
+  constructor(private productService: ProductService,
+              private http: HttpClient,
+              private router: Router) {}
 
   ngOnInit() {
     this.productService.getCartObservable().subscribe((product: ProductDetails) => {
@@ -56,5 +62,20 @@ export class CartComponent implements OnInit{
   // important methods
   //ForEach, Map, Filter, Reduce, Find, FindIndex
 
+  onClear() {
+    this.cartItems = []
+    this.productService.isCartCleared.emit(true)
+  }
+
+  order() {
+    const order = {
+      date: new Date(),
+      orderItems: [...this.cartItems],
+      total: this.total
+    }
+    this.http.post(this.urlOrder, order).subscribe(() => {
+      this.orderSaved.emit()
+    })
+  }
 
 }

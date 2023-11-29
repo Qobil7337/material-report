@@ -1,3 +1,4 @@
+<div class="margin-top">
 <div class="container" *ngFor="let item of goodsInwards; let i = index">
   <div class="card">
     <div class="card-header">
@@ -15,7 +16,7 @@
 <div class="d-flex justify-content-center">
  <button style="text-align: center" type="button" class="btn btn-success btn-sm" routerLink="/goods-inwards-create">Add</button>
 </div>
-
+</div>
 <!-- Modal -->
 <div *ngIf="selectedGoodsInwardsItem" class="modal wider-modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

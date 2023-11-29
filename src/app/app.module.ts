@@ -30,6 +30,9 @@ import { WarehouseComponent } from './warehouse/warehouse.component';
 import { ProductComponent } from './sales/product/product.component';
 import { CartComponent } from './sales/product/cart/cart.component';
 import { ProductInCartComponent } from './sales/product/cart/product-in-cart/product-in-cart.component';
+import { ProductNavComponent } from './sales/product-nav/product-nav.component';
+import { OrdersComponent } from './orders/orders.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -49,25 +52,28 @@ import { ProductInCartComponent } from './sales/product/cart/product-in-cart/pro
     WarehouseComponent,
     ProductComponent,
     CartComponent,
-    ProductInCartComponent
+    ProductInCartComponent,
+    ProductNavComponent,
+    OrdersComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule,
-    MatIconModule,
-    MatButtonModule,
-    NzSelectModule,
-    NzSpinModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatInputModule,
+        MatNativeDateModule,
+        MatIconModule,
+        MatButtonModule,
+        NzSelectModule,
+        NzSpinModule,
+        MatDialogModule,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

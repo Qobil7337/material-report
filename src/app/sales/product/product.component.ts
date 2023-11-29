@@ -14,6 +14,10 @@ export class ProductComponent implements OnInit {
   amount = 0
 
   ngOnInit() {
+    this.productService.isCartCleared.subscribe(() => {
+        this.amount = 0
+        this.isClicked = false;
+    })
   }
 
   constructor(private productService: ProductService) {
@@ -44,6 +48,7 @@ export class ProductComponent implements OnInit {
 
   changeAmount() {
     const productDetail = {
+      productID: this.product.id,
       productName: this.product.name,
       productAmount: this.amount,
       productPrice: this.product.salePrice,
@@ -53,4 +58,5 @@ export class ProductComponent implements OnInit {
     this.productService.addToCart(productDetail);
 
   }
+
 }

@@ -6,6 +6,7 @@ import {Unit} from "../goods-inward/goods-inward.component";
 
 export interface Products {
   date: Date
+  id: number
   name: string
   category: string
   imageUrl: string
@@ -47,7 +48,6 @@ export class ProductsComponent {
   loadProducts() {
     this.http.get<Products[]>(this.urlProduct).subscribe((data) => {
       this.products = data
-      console.log(data)
     })
   }
 
