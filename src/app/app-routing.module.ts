@@ -11,8 +11,10 @@ import {ProductsComponent} from "./products/products.component";
 import {ProductCreateComponent} from "./products/product-create/product-create.component";
 import {WarehouseComponent} from "./warehouse/warehouse.component";
 import {OrdersComponent} from "./orders/orders.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'nomenclature', component: NomenclatureComponent},
   {path: 'calculation', component: CalculationComponent},
   {path: 'goods-inwards', component: GoodsInwardComponent},

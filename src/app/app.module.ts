@@ -33,6 +33,8 @@ import { ProductInCartComponent } from './sales/product/cart/product-in-cart/pro
 import { ProductNavComponent } from './sales/product-nav/product-nav.component';
 import { OrdersComponent } from './orders/orders.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { WarehouseItemsComponent } from './warehouse/warehouse-items/warehouse-items.component';
+import { WarehouseItemsMovementComponent } from './warehouse/warehouse-items-movement/warehouse-items-movement.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import {MatDialogModule} from "@angular/material/dialog";
     CartComponent,
     ProductInCartComponent,
     ProductNavComponent,
-    OrdersComponent
+    OrdersComponent,
+    WarehouseItemsComponent,
+    WarehouseItemsMovementComponent
   ],
     imports: [
         BrowserModule,

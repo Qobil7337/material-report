@@ -1,0 +1,23 @@
+<div class="container">
+  <h4>Warehouse</h4>
+  <table class="table table-hover">
+    <thead>
+    <tr class="row">
+      <th scope="col" class="col-1">#</th>
+      <th scope="col" class="col-1">ID</th>
+      <th scope="col" class="col-4">Name</th>
+      <th scope="col" class="col-2">Unit of measure</th>
+      <th scope="col" class="d-flex justify-content-center col-2">Accounting balance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr (click)="showMovement()" style="cursor: pointer" *ngFor="let item of warehouseItems; let i = index" class="row">
+      <th scope="row" class="col-1">{{i + 1}}</th>
+      <td class="col-1">{{item.inventory.id}}</td>
+      <td class="col-4">{{item.inventory.name}}</td>
+      <td class="col-2">{{item.unitOfMeasure}}</td>
+      <td class="d-flex justify-content-center col-2">{{item.accountingBalance}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -3,6 +3,7 @@ import {Nomenclature} from "../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
 
 export interface GoodsInwards {
+  id: number
   date: Date
   supplier: string
   warehouse: string
@@ -57,9 +58,7 @@ export class GoodsInwardComponent  implements OnInit {
 
   public loadNomenclatures() {
     this.http.get<Nomenclature[]>(this.url).subscribe(data => {
-      console.log(data)
       this.nomenclatures = data;
-      console.log(this.nomenclatures)
     });
   }
 

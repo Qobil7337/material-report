@@ -15,6 +15,7 @@ export class SalesComponent implements OnInit{
   pizzaCategory: Products[] = []
   burgersCategory: Products[] = []
   sandwichCategory: Products[] = []
+  breakfastCategory: Products[] = []
   saladsCategory: Products[] = []
   spinnerCategory: Products[] = []
   drinksCategory: Products[] = []
@@ -43,6 +44,7 @@ export class SalesComponent implements OnInit{
       this.pizzaCategory =  this.products.filter(value => value.category === 'Pizza')
       this.burgersCategory =  this.products.filter(value => value.category === 'Burgers')
       this.sandwichCategory =  this.products.filter(value => value.category === 'Sandwich')
+      this.breakfastCategory =  this.products.filter(value => value.category === 'Breakfast')
       this.saladsCategory =  this.products.filter(value => value.category === 'Salads')
       this.spinnerCategory =  this.products.filter(value => value.category === 'Spinner')
       this.drinksCategory =  this.products.filter(value => value.category === 'Drinks')

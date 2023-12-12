@@ -3,19 +3,22 @@
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">ID</th>
+      <th scope="col" class="col-1">#</th>
+      <th scope="col" class="col-1">ID</th>
       <th scope="col">Name</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let item of nomenclature; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>{{ item.id }}</td>
+      <th scope="row" class="col-1">{{ i + 1 }}</th>
+      <td class="col-1">{{ item.id }}</td>
       <td>{{ item.name }}</td>
-      <td>
-        <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
-        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
+      <td class="col-3">
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
+          <button type="button" class="btn btn-outline-primary btn-sm ml-2" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
+        </div>
       </td>
     </tr>
     </tbody>
