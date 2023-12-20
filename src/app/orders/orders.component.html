@@ -2,11 +2,11 @@
   <div class="container" *ngFor="let item of orders; let i = index;">
     <div class="card">
       <div class="card-header">
-        {{ item.date }}
+        {{ item.date | date: 'yyyy-MM-dd'}}
       </div>
       <div class="card-body">
         <h3>ID: {{item.id}}</h3>
-        <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.total) }} $</h4>
+        <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.total) }}</h4>
         <button style="margin-right: 5px" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
         <button type="button" class="btn btn-outline-danger" (click)="deleteOrder(item)">Delete</button>
       </div>
@@ -25,7 +25,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Date: {{ selectedOrder.date }}</p>
+        <p>Date: {{ selectedOrder.date | date: 'yyyy-MM-dd'}}</p>
         <div>
           <table class="table">
             <thead>
@@ -46,7 +46,7 @@
             </tbody>
           </table>
         </div>
-        <p>Total: {{ formatNumberWithSpaceSeparator(selectedOrder.total) }} $</p>
+        <p>Total: {{ formatNumberWithSpaceSeparator(selectedOrder.total) }}</p>
         <!-- Add more details as needed -->
       </div>
       <div class="modal-footer">

@@ -2,11 +2,11 @@
 <div class="container" *ngFor="let item of goodsInwards; let i = index">
   <div class="card">
     <div class="card-header">
-      {{ item.date }}
+      {{ item.date | date: 'yyyy-MM-dd'}}
     </div>
     <div class="card-body">
       <h3>ID: {{item.id}}</h3>
-      <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.totalSum) }} $</h4>
+      <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.totalSum) }}</h4>
       <p class="card-text">Supplier: {{ item.supplier }}.</p>
       <p class="card-text">Warehouse: {{ item.warehouse }}.</p>
       <button style="margin-right: 5px" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
@@ -29,7 +29,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Date of Delivery: {{ selectedGoodsInwardsItem.date }}</p>
+        <p>Date of Delivery: {{ selectedGoodsInwardsItem.date | date: 'yyyy-MM-dd'}}</p>
         <p>Supplier: {{ selectedGoodsInwardsItem.supplier }}</p>
         <p>Warehouse: {{ selectedGoodsInwardsItem.warehouse }}</p>
           <div>
@@ -58,7 +58,7 @@
               </tbody>
             </table>
           </div>
-        <p>Total Sum: {{ formatNumberWithSpaceSeparator(selectedGoodsInwardsItem.totalSum) }} $</p>
+        <p>Total Sum: {{ formatNumberWithSpaceSeparator(selectedGoodsInwardsItem.totalSum) }}</p>
         <!-- Add more details as needed -->
       </div>
       <div class="modal-footer">

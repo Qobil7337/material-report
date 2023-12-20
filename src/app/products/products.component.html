@@ -2,7 +2,7 @@
 <div class="container" *ngFor="let item of products; let i = index">
   <div class="card">
     <div class="card-header">
-      {{ item.date }}
+      {{ item.date | date: 'yyyy-MM-dd'}}
     </div>
     <div class="card-body d-flex">
       <div class="flex-grow-1">
@@ -33,7 +33,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Date created: {{ selectedProductItem.date }}</p>
+        <p>Date created: {{ selectedProductItem.date | date: 'yyyy-MM-dd'}}</p>
         <p>Name: {{ selectedProductItem.name }}</p>
         <p>Category: {{ selectedProductItem.category }}</p>
         <div>
@@ -62,8 +62,8 @@
             </tbody>
           </table>
         </div>
-        <p>Total Cost: {{ formatNumberWithSpaceSeparator(selectedProductItem.totalCost) }} $</p>
-        <p>Price: {{ formatNumberWithSpaceSeparator(selectedProductItem.salePrice) }} $</p>
+        <p>Total Cost: {{ formatNumberWithSpaceSeparator(selectedProductItem.totalCost) }}</p>
+        <p>Price: {{ formatNumberWithSpaceSeparator(selectedProductItem.salePrice) }}</p>
         <p>Gross Profit: {{ formatNumberWithSpaceSeparator(selectedProductItem.grossProfit) }} </p>
         <p>Gross Profit Margin: {{ formatNumberWithSpaceSeparator(selectedProductItem.grossProfitMargin) }}% </p>
         <!-- Add more details as needed -->
