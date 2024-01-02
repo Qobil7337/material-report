@@ -13,7 +13,7 @@ export interface WarehouseItems {
   styleUrls: ['./warehouse-items.component.css']
 })
 export class WarehouseItemsComponent {
-  urlWarehouse = 'http://localhost:3000/warehouse';
+  urlWarehouse = 'https://whale-app-cb8sf.ondigitalocean.app/warehouse';
   warehouseItems: WarehouseItems[] = []
   constructor(private http: HttpClient) {
   }

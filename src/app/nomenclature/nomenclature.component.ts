@@ -13,7 +13,7 @@ export interface Nomenclature {
   styleUrls: ['./nomenclature.component.css']
 })
 export class NomenclatureComponent implements OnInit {
-  private url = 'http://localhost:3000/nomenclature';
+  private url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature';
   public nomenclature: Nomenclature[];
   public name = new FormControl(null);
   public updateName = new FormControl(null)

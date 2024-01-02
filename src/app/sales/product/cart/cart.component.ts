@@ -12,7 +12,7 @@ export class CartComponent implements OnInit{
   @Output() orderSaved: EventEmitter<any> = new EventEmitter<any>()
   cartItems: ProductDetails[] = []
   total: number
-  urlOrder = 'http://localhost:3000/order'
+  urlOrder = 'https://whale-app-cb8sf.ondigitalocean.app/order'
   @Output() clearCart: EventEmitter<any> = new EventEmitter<any>()
   constructor(private productService: ProductService,
               private http: HttpClient,

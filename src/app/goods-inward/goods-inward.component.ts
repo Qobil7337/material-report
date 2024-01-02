@@ -33,8 +33,8 @@ export class GoodsInwardComponent  implements OnInit {
 
   selectedGoodsInwardsItem: any
   nomenclatures: Nomenclature[]
-  private url = 'http://localhost:3000/nomenclature';
-  private urlGoodsInwards = 'http://localhost:3000/goods-inwards';
+  private url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature';
+  private urlGoodsInwards = 'https://whale-app-cb8sf.ondigitalocean.app/goods-inwards';
   goodsInwards: GoodsInwards[] = [];
 
   constructor(private http: HttpClient) {
@@ -64,7 +64,7 @@ export class GoodsInwardComponent  implements OnInit {
 
   deleteGoodsInwards(item: any) {
     const id = item.id
-    const url = `http://localhost:3000/goods-inwards/${id}`
+    const url = `https://whale-app-cb8sf.ondigitalocean.app/goods-inwards/${id}`
     this.http.delete(url).subscribe(() => {
       this.loadGoodsInwards()
     })

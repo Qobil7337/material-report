@@ -32,7 +32,7 @@ export interface Orders {
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit{
-  urlOrders = 'http://localhost:3000/order';
+  urlOrders = 'https://whale-app-cb8sf.ondigitalocean.app/order';
   orders: Orders[] = []
   selectedOrder: Orders
   constructor(private http: HttpClient) {
@@ -58,7 +58,7 @@ export class OrdersComponent implements OnInit{
 
   deleteOrder(item: any) {
     const id = item.id
-    const url = `http://localhost:3000/order/${id}`
+    const url = `https://whale-app-cb8sf.ondigitalocean.app/order/${id}`
     this.http.delete(url).subscribe(() => {
       this.loadOrders()
     })

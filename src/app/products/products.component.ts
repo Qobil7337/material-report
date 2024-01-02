@@ -34,7 +34,7 @@ export interface Products {
 export class ProductsComponent {
 
   selectedProductItem: any
-  private urlProduct = 'http://localhost:3000/product';
+  private urlProduct = 'https://whale-app-cb8sf.ondigitalocean.app/product';
   products: Products[] = [];
 
   constructor(private http: HttpClient) {
@@ -63,7 +63,7 @@ export class ProductsComponent {
 
   deleteProduct(item: any) {
     const id = item.id
-    const url = `http://localhost:3000/product/${id}`
+    const url = `https://whale-app-cb8sf.ondigitalocean.app/product/${id}`
     this.http.delete(url).subscribe(() => {
       this.loadProducts()
     })

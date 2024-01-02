@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class SalesComponent implements OnInit{
   showModal = false
-  urlProduct = 'http://localhost:3000/product';
+  urlProduct = 'https://whale-app-cb8sf.ondigitalocean.app/product';
   products: Products[] = [];
   pizzaCategory: Products[] = []
   burgersCategory: Products[] = []

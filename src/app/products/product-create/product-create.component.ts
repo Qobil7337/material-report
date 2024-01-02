@@ -12,8 +12,8 @@ import {Router} from "@angular/router";
 export class ProductCreateComponent {
   productForm: FormGroup
   nomenclatures: Nomenclature[]
-  url = 'http://localhost:3000/nomenclature'
-  urlCreate = 'http://localhost:3000/product'
+  url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature'
+  urlCreate = 'https://whale-app-cb8sf.ondigitalocean.app/product'
   showTable = false
 
   constructor(private fb: FormBuilder,

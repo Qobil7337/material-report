@@ -14,8 +14,8 @@ import {Router} from "@angular/router";
 export class GoodsInwardCreateComponent implements OnInit{
   goodsInwardsForm: FormGroup
   nomenclatures: Nomenclature[]
-  url = 'http://localhost:3000/nomenclature'
-  urlCreate = 'http://localhost:3000/goods-inwards'
+  url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature'
+  urlCreate = 'https://whale-app-cb8sf.ondigitalocean.app/goods-inwards'
   showTable = false
 
   constructor(private fb: FormBuilder,
