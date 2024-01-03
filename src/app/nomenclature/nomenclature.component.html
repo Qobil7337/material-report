@@ -16,7 +16,7 @@
       <td>{{ item.name }}</td>
       <td class="col-3">
         <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)" disabled>Delete</button>
           <button type="button" class="btn btn-outline-primary btn-sm ml-2" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
         </div>
       </td>
@@ -25,7 +25,7 @@
   </table>
 </div>
 <div class="d-flex justify-content-center">
-  <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-sm">Add</button>
+  <button style="margin-bottom: 20px" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-sm">Add</button>
 </div>
 
 <!-- Small modal -->

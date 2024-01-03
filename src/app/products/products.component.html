@@ -8,9 +8,9 @@
       <div class="flex-grow-1">
         <h2 class="card-title">{{ item.name }} </h2>
         <h4 class="card-title">Category: {{ item.category }}.</h4>
-        <h3 class="card-title" id="price">Price: {{ formatNumberWithSpaceSeparator(item.salePrice) }} $</h3>
+        <h3 class="card-title" id="price">Price: {{ formatNumberWithSpaceSeparator(item.salePrice) }} </h3>
         <button style="margin-right: 5px" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
-        <button type="button" class="btn btn-outline-danger" (click)="deleteProduct(item)">Delete</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deleteProduct(item)" disabled>Delete</button>
       </div>
       <img src="{{ item.imageUrl }}" alt="{{ item.name }}" class="card-img-right img-thumbnail img-fluid fixed-size-image" style="width: 200px; height: 200px; object-fit: cover;">
     </div>
