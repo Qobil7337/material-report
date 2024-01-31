@@ -106,6 +106,7 @@
         <button style="margin-bottom: 20px" type="submit" class="btn btn-primary btn-sm" [disabled]="!goodsInwardsForm.valid">Create</button>
   </form>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" >{{ loadingSpinnerService.getMessage() }}</p></ngx-spinner>
 
 
 

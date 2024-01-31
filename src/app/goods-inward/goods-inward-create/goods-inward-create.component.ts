@@ -3,6 +3,9 @@ import {FormArray, FormBuilder,FormGroup, Validators} from "@angular/forms";
 import {Nomenclature} from "../../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {UriService} from "../../uri.service";
+import {LoadingSpinnerService} from "../../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../../sweet-alert.service";
 
 
 
@@ -14,13 +17,16 @@ import {Router} from "@angular/router";
 export class GoodsInwardCreateComponent implements OnInit{
   goodsInwardsForm: FormGroup
   nomenclatures: Nomenclature[]
-  url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature'
-  urlCreate = 'https://whale-app-cb8sf.ondigitalocean.app/goods-inwards'
+  url = this.uriService.getFullUrl('nomenclature')
+  urlCreate = this.uriService.getFullUrl('goods-inwards')
   showTable = false
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) { }
 
 
   ngOnInit() {
@@ -103,10 +109,12 @@ export class GoodsInwardCreateComponent implements OnInit{
   }
 
   onSubmit() {
+    this.loadingSpinnerService.show('create')
     const formData = this.goodsInwardsForm.value
-    console.log(formData)
     this.http.post(this.urlCreate, formData).subscribe(() => {
+      this.loadingSpinnerService.hide()
       this.router.navigate(['goods-inwards'])
+      this.sweetAlertService.goodsInwardCreatedAlert()
     })
 
   }

@@ -35,6 +35,9 @@ import { OrdersComponent } from './orders/orders.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { WarehouseItemsComponent } from './warehouse/warehouse-items/warehouse-items.component';
 import { WarehouseItemsMovementComponent } from './warehouse/warehouse-items-movement/warehouse-items-movement.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -58,7 +61,8 @@ import { WarehouseItemsMovementComponent } from './warehouse/warehouse-items-mov
     ProductNavComponent,
     OrdersComponent,
     WarehouseItemsComponent,
-    WarehouseItemsMovementComponent
+    WarehouseItemsMovementComponent,
+    LoadingSpinnerComponent
   ],
     imports: [
         BrowserModule,
@@ -77,6 +81,8 @@ import { WarehouseItemsMovementComponent } from './warehouse/warehouse-items-mov
         NzSelectModule,
         NzSpinModule,
         MatDialogModule,
+        NgxSpinnerModule.forRoot(),
+        SweetAlert2Module.forRoot(),
     ],
   bootstrap: [AppComponent]
 })

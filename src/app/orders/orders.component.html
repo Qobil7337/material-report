@@ -5,7 +5,7 @@
         {{ item.date | date: 'yyyy-MM-dd'}}
       </div>
       <div class="card-body">
-        <h3>ID: {{item.id}}</h3>
+        <h3>Order ID: {{item.id}}</h3>
         <h4 class="card-title">{{ formatNumberWithSpaceSeparator(item.total) }}</h4>
         <button style="margin-right: 5px" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" (click)="openModal(item)">View details</button>
         <button type="button" class="btn btn-outline-danger" (click)="deleteOrder(item)">Delete</button>
@@ -56,6 +56,9 @@
     </div>
   </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" >{{ loadingSpinnerService.getMessage() }}</p></ngx-spinner>
+
+
 
 
 

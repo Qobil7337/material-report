@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Nomenclature} from "../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
 import {Unit} from "../goods-inward/goods-inward.component";
+import {UriService} from "../uri.service";
+import {LoadingSpinnerService} from "../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../sweet-alert.service";
 
 
 export interface Products {
@@ -31,13 +34,16 @@ export interface Products {
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit{
 
   selectedProductItem: any
-  private urlProduct = 'https://whale-app-cb8sf.ondigitalocean.app/product';
+  urlProduct = this.uriService.getFullUrl('product')
   products: Products[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) {
   }
 
 
@@ -46,7 +52,10 @@ export class ProductsComponent {
   }
 
   loadProducts() {
+    this.loadingSpinnerService.show('fetch')
     this.http.get<Products[]>(this.urlProduct).subscribe((data) => {
+      data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.loadingSpinnerService.hide()
       this.products = data
     })
   }
@@ -62,10 +71,18 @@ export class ProductsComponent {
 
 
   deleteProduct(item: any) {
-    const id = item.id
-    const url = `https://whale-app-cb8sf.ondigitalocean.app/product/${id}`
-    this.http.delete(url).subscribe(() => {
-      this.loadProducts()
+    this.sweetAlertService.deleteConfirmAlert().then(isConfirmed => {
+      if (isConfirmed) {
+        this.loadingSpinnerService.show('delete')
+        const id = item.id;
+        const url = this.uriService.getFullUrl(`product/${id}`);
+        this.http.delete(url).subscribe(() => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.productDeletedAlert()
+          this.loadProducts()
+        })
+      }
     })
   }
+
 }

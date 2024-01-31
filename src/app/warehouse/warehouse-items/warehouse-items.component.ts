@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {UriService} from "../../uri.service";
 
 export interface WarehouseItems {
   id: number
@@ -13,9 +14,9 @@ export interface WarehouseItems {
   styleUrls: ['./warehouse-items.component.css']
 })
 export class WarehouseItemsComponent {
-  urlWarehouse = 'https://whale-app-cb8sf.ondigitalocean.app/warehouse';
+  urlWarehouse = this.uriService.getFullUrl('warehouse');
   warehouseItems: WarehouseItems[] = []
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private uriService: UriService) {
   }
 
   ngOnInit(): void {

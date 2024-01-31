@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Nomenclature} from "../../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {UriService} from "../../uri.service";
+import {LoadingSpinnerService} from "../../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../../sweet-alert.service";
 
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnInit{
   productForm: FormGroup
   nomenclatures: Nomenclature[]
-  url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature'
-  urlCreate = 'https://whale-app-cb8sf.ondigitalocean.app/product'
+  url = this.uriService.getFullUrl('nomenclature')
+  urlCreate = this.uriService.getFullUrl('product')
   showTable = false
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) { }
 
 
   ngOnInit() {
@@ -146,12 +152,13 @@ export class ProductCreateComponent {
   }
 
   onSubmit() {
+    this.loadingSpinnerService.show('create')
     const formData = this.productForm.value
-    console.log(formData)
     this.http.post(this.urlCreate, formData).subscribe(() => {
+      this.loadingSpinnerService.hide()
       this.router.navigate(['products'])
+      this.sweetAlertService.productCreatedAlert()
     })
-
   }
 
   loadNomenclatures() {

@@ -16,7 +16,7 @@
       <td>{{ item.name }}</td>
       <td class="col-3">
         <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)" disabled>Delete</button>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteNomenclature(item.id)">Delete</button>
           <button type="button" class="btn btn-outline-primary btn-sm ml-2" data-toggle="modal" data-target=".bd-update-example-modal-sm" (click)="onUpdateNomenclature(item.id)">Update</button>
         </div>
       </td>
@@ -76,6 +76,8 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "default" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" >{{ loadingSpinnerService.getMessage() }}</p></ngx-spinner>
 
 
 

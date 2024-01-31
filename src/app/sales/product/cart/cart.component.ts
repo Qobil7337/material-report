@@ -2,6 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProductDetails, ProductService} from "../../product.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {UriService} from "../../../uri.service";
+import {LoadingSpinnerService} from "../../../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../../../sweet-alert.service";
 
 @Component({
   selector: 'app-cart',
@@ -12,11 +15,14 @@ export class CartComponent implements OnInit{
   @Output() orderSaved: EventEmitter<any> = new EventEmitter<any>()
   cartItems: ProductDetails[] = []
   total: number
-  urlOrder = 'https://whale-app-cb8sf.ondigitalocean.app/order'
+  urlOrder = this.uriService.getFullUrl('order')
   @Output() clearCart: EventEmitter<any> = new EventEmitter<any>()
   constructor(private productService: ProductService,
               private http: HttpClient,
-              private router: Router) {}
+              private router: Router,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) {}
 
   ngOnInit() {
     this.productService.getCartObservable().subscribe((product: ProductDetails) => {
@@ -68,13 +74,16 @@ export class CartComponent implements OnInit{
   }
 
   order() {
+    this.loadingSpinnerService.show('save')
     const order = {
       date: new Date(),
       orderItems: [...this.cartItems],
       total: this.total
     }
     this.http.post(this.urlOrder, order).subscribe(() => {
-      this.orderSaved.emit()
+      this.loadingSpinnerService.hide()
+      this.router.navigate(['orders'])
+      this.sweetAlertService.orderSavedAlert()
     })
   }
 

@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {UriService} from "../uri.service";
+import {Products} from "../products/products.component";
+import {LoadingSpinnerService} from "../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../sweet-alert.service";
 
 
 export interface Orders {
@@ -32,10 +36,13 @@ export interface Orders {
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit{
-  urlOrders = 'https://whale-app-cb8sf.ondigitalocean.app/order';
+  urlOrders = this.uriService.getFullUrl('order')
   orders: Orders[] = []
   selectedOrder: Orders
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) {
   }
 
   ngOnInit(): void {
@@ -43,7 +50,10 @@ export class OrdersComponent implements OnInit{
   }
 
   loadOrders() {
+    this.loadingSpinnerService.show('fetch')
     this.http.get<Orders[]>(this.urlOrders).subscribe((data) => {
+      data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.loadingSpinnerService.hide()
       this.orders = data
     })
   }
@@ -57,10 +67,19 @@ export class OrdersComponent implements OnInit{
   }
 
   deleteOrder(item: any) {
-    const id = item.id
-    const url = `https://whale-app-cb8sf.ondigitalocean.app/order/${id}`
-    this.http.delete(url).subscribe(() => {
-      this.loadOrders()
+    this.sweetAlertService.deleteConfirmAlert().then(isConfirmed => {
+      if (isConfirmed) {
+        this.loadingSpinnerService.show('delete')
+        const id = item.id;
+        const url = this.uriService.getFullUrl(`order/${id}`);
+        this.http.delete(url).subscribe(() => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.orderDeletedAlert()
+          this.loadOrders()
+        })
+      }
     })
   }
+
+
 }

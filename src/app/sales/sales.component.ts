@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 
 import {Products} from "../products/products.component";
 import {Router} from "@angular/router";
+import {UriService} from "../uri.service";
+import {LoadingSpinnerService} from "../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../sweet-alert.service";
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -10,7 +13,7 @@ import {Router} from "@angular/router";
 })
 export class SalesComponent implements OnInit{
   showModal = false
-  urlProduct = 'https://whale-app-cb8sf.ondigitalocean.app/product';
+  urlProduct = this.uriService.getFullUrl('product');
   products: Products[] = [];
   pizzaCategory: Products[] = []
   burgersCategory: Products[] = []
@@ -28,7 +31,10 @@ export class SalesComponent implements OnInit{
   @Output() onClearCart: EventEmitter<any> = new EventEmitter<any>()
 
   constructor(private http: HttpClient,
-              private router: Router
+              private router: Router,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService
   ) {
   }
 
@@ -39,7 +45,9 @@ export class SalesComponent implements OnInit{
 
 
   loadProducts() {
+    this.loadingSpinnerService.show('fetch')
     this.http.get<Products[]>(this.urlProduct).subscribe((data) => {
+      this.loadingSpinnerService.hide()
       this.products = data
       this.pizzaCategory =  this.products.filter(value => value.category === 'Pizza')
       this.burgersCategory =  this.products.filter(value => value.category === 'Burgers')

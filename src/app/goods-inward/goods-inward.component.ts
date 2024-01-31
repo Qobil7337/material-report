@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Nomenclature} from "../nomenclature/nomenclature.component";
 import {HttpClient} from "@angular/common/http";
+import {UriService} from "../uri.service";
+import {LoadingSpinnerService} from "../loading-spinner/loading-spinner.service";
+import {SweetAlertService} from "../sweet-alert.service";
 
 export interface GoodsInwards {
   id: number
@@ -33,11 +36,12 @@ export class GoodsInwardComponent  implements OnInit {
 
   selectedGoodsInwardsItem: any
   nomenclatures: Nomenclature[]
-  private url = 'https://whale-app-cb8sf.ondigitalocean.app/nomenclature';
-  private urlGoodsInwards = 'https://whale-app-cb8sf.ondigitalocean.app/goods-inwards';
   goodsInwards: GoodsInwards[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private uriService: UriService,
+              protected loadingSpinnerService: LoadingSpinnerService,
+              private sweetAlertService: SweetAlertService) {
   }
 
 
@@ -46,7 +50,11 @@ export class GoodsInwardComponent  implements OnInit {
   }
 
   loadGoodsInwards() {
-    this.http.get<GoodsInwards[]>(this.urlGoodsInwards).subscribe((data) => {
+    this.loadingSpinnerService.show('fetch')
+    const url = this.uriService.getFullUrl('goods-inwards');
+    this.http.get<GoodsInwards[]>(url).subscribe((data) => {
+      data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.loadingSpinnerService.hide()
       this.goodsInwards = data
     })
   }
@@ -57,17 +65,26 @@ export class GoodsInwardComponent  implements OnInit {
 
 
   public loadNomenclatures() {
-    this.http.get<Nomenclature[]>(this.url).subscribe(data => {
+    const url = this.uriService.getFullUrl('nomenclature');
+    this.http.get<Nomenclature[]>(url).subscribe(data => {
       this.nomenclatures = data;
     });
   }
 
   deleteGoodsInwards(item: any) {
-    const id = item.id
-    const url = `https://whale-app-cb8sf.ondigitalocean.app/goods-inwards/${id}`
-    this.http.delete(url).subscribe(() => {
-      this.loadGoodsInwards()
+    this.sweetAlertService.deleteConfirmAlert().then(isConfirmed => {
+      if (isConfirmed) {
+        this.loadingSpinnerService.show('delete')
+        const id = item.id;
+        const url = this.uriService.getFullUrl(`goods-inwards/${id}`);
+        this.http.delete(url).subscribe(() => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.goodsInwardDeletedAlert()
+          this.loadGoodsInwards()
+        })
+      }
     })
+
   }
 
   formatNumberWithSpaceSeparator(value: number): string {
