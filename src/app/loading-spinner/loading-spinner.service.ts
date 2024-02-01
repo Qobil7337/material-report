@@ -22,7 +22,6 @@ export class LoadingSpinnerService {
   }
 
   hide(): void {
-    this.customMessage = this.defaultMessages.save;
     this.spinnerService.hide();
   }
 
