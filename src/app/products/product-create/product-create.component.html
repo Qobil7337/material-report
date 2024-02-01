@@ -75,7 +75,7 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">ID</th>
+          <th style="display: none" scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Unit</th>
           <th scope="col">Quantity</th>
@@ -86,7 +86,7 @@
         <tbody formArrayName="productItem">
         <tr *ngFor="let productItem of productItem.controls; let i=index" [formGroupName]="i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>
+          <td style="display: none">
             <input class="form-control form-control-sm col-4" formControlName="nomenclatureID">
           </td>
           <td>
