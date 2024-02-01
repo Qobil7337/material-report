@@ -112,7 +112,7 @@
             <input class="form-control form-control-sm col-7" formControlName="price">
           </td>
           <td>
-            <input class="form-control form-control-sm" formControlName="sum">
+            <input class="form-control form-control-sm custom-disabled" formControlName="sum" readonly>
           </td>
           <td><button type="button" class="btn btn-sm btn-danger" (click)="removeFormGroup(i)">Remove</button></td>
         </tr>
@@ -129,7 +129,7 @@
           <label>Total Cost:</label>
         </div>
         <div class="col-2">
-          <input formControlName="totalCost" type="text" class="form-control form-control-sm" id="totalCost">
+          <input formControlName="totalCost" type="text" class="form-control form-control-sm custom-disabled" id="totalCost" readonly>
         </div>
       </div>
     </div>
@@ -149,7 +149,7 @@
           <label>Gross Profit: </label>
         </div>
         <div class="col-2">
-          <input formControlName="grossProfit" type="text" class="form-control form-control-sm" id="grossProfit">
+          <input formControlName="grossProfit" type="text" class="form-control form-control-sm custom-disabled" id="grossProfit" readonly>
         </div>
       </div>
     </div>
@@ -159,7 +159,7 @@
           <label>Gross Profit Margin: </label>
         </div>
         <div class="col-2">
-          <input formControlName="grossProfitMargin" type="text" class="form-control form-control-sm" id="grossProfitMargin">
+          <input formControlName="grossProfitMargin" type="text" class="form-control form-control-sm custom-disabled" id="grossProfitMargin" readonly>
         </div>
       </div>
     </div>
