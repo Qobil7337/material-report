@@ -73,13 +73,21 @@ export class ProductsComponent implements OnInit{
   deleteProduct(item: any) {
     this.sweetAlertService.deleteConfirmAlert().then(isConfirmed => {
       if (isConfirmed) {
+
         this.loadingSpinnerService.show('delete')
         const id = item.id;
         const url = this.uriService.getFullUrl(`product/${id}`);
+
         this.http.delete(url).subscribe(() => {
+
           this.loadingSpinnerService.hide()
           this.sweetAlertService.productDeletedAlert()
           this.loadProducts()
+
+        }, error => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.handleProductErrorAlert()
+          console.log(error)
         })
       }
     })

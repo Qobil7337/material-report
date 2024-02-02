@@ -81,6 +81,9 @@ export class GoodsInwardComponent  implements OnInit {
           this.loadingSpinnerService.hide()
           this.sweetAlertService.goodsInwardDeletedAlert()
           this.loadGoodsInwards()
+        }, error => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.handelCommonError()
         })
       }
     })

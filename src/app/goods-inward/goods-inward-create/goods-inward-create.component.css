@@ -18,3 +18,9 @@ table {
 input.ng-invalid.ng-touched:not(#dateInput) {
   border: 1px solid red;
 }
+.custom-disabled:read-only {
+  background-color: #fff; /* Example background color for disabled state */
+  border: 1px solid #ced4da; /* Example border for disabled state */
+  color: #495057; /* Example text color for disabled state */
+  cursor: not-allowed; /* Example cursor for disabled state */
+}

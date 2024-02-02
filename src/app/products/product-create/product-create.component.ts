@@ -158,6 +158,9 @@ export class ProductCreateComponent implements OnInit{
       this.loadingSpinnerService.hide()
       this.router.navigate(['products'])
       this.sweetAlertService.productCreatedAlert()
+    }, error => {
+      this.loadingSpinnerService.hide()
+      this.sweetAlertService.handelCommonError()
     })
   }
 

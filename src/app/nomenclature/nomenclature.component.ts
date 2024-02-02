@@ -48,6 +48,9 @@ export class NomenclatureComponent implements OnInit {
       this.loadingSpinnerService.hide()
       this.sweetAlertService.rawMaterialCreatedAlert()
       this.loadNomenclatures();
+    }, error => {
+      this.loadingSpinnerService.hide()
+      this.sweetAlertService.handelCommonError()
     });
   }
 
@@ -62,6 +65,9 @@ export class NomenclatureComponent implements OnInit {
       this.loadingSpinnerService.hide()
       this.sweetAlertService.updateAlert()
       this.loadNomenclatures();
+    }, error => {
+      this.loadingSpinnerService.hide()
+      this.sweetAlertService.handelCommonError()
     })
   }
 
@@ -73,6 +79,10 @@ export class NomenclatureComponent implements OnInit {
             this.loadingSpinnerService.hide()
             this.sweetAlertService.rawMaterialDeletedAlert()
             this.loadNomenclatures();
+        }, error => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.handleNomenclatureErrorAlert()
+          console.log(error)
         });
       }
     })

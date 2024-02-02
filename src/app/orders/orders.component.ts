@@ -76,6 +76,9 @@ export class OrdersComponent implements OnInit{
           this.loadingSpinnerService.hide()
           this.sweetAlertService.orderDeletedAlert()
           this.loadOrders()
+        }, error => {
+          this.loadingSpinnerService.hide()
+          this.sweetAlertService.handelCommonError()
         })
       }
     })

@@ -45,7 +45,7 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">ID</th>
+<!--          <th scope="col">ID</th>-->
           <th scope="col">Name</th>
           <th scope="col">Unit</th>
           <th scope="col">Quantity</th>
@@ -56,7 +56,7 @@
         <tbody formArrayName="goodsInwardsItems">
         <tr *ngFor="let goodsInwardsItem of goodsInwardsItems.controls; let i=index" [formGroupName]="i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>
+          <td style="display: none">
             <input class="form-control form-control-sm col-4" formControlName="nomenclatureID">
           </td>
           <td>
@@ -82,7 +82,7 @@
             <input class="form-control form-control-sm col-7" formControlName="price">
           </td>
           <td>
-            <input class="form-control form-control-sm" formControlName="sum">
+            <input class="form-control form-control-sm custom-disabled" formControlName="sum" readonly>
           </td>
           <td><button type="button" class="btn btn-sm btn-danger" (click)="removeFormGroup(i)">Remove</button></td>
         </tr>
@@ -99,7 +99,7 @@
           <label for="supplier">Total sum:</label>
         </div>
         <div class="col-2">
-          <input formControlName="totalSum" type="text" class="form-control form-control-sm" id="totalSum">
+          <input formControlName="totalSum" type="text" class="form-control form-control-sm custom-disabled" id="totalSum" readonly>
         </div>
       </div>
     </div>

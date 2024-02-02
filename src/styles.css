@@ -2,8 +2,8 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 @import  'node_modules/ngx-spinner/animations/ball-spin.css';
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Raleway', sans-serif}
+
+body {  font-family: 'Raleway', sans-serif}
 
 
 

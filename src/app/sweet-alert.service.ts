@@ -126,4 +126,29 @@ export class SweetAlertService {
       confirmButtonText: 'OK'
     });
   }
+
+  public handleProductErrorAlert() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong! \n" +
+        "Unable to delete the product. It is currently associated with one or more orders. Please delete orders that have this product first before deleting the product.",
+    });
+  }
+  public handleNomenclatureErrorAlert() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong! \n" +
+        "Unable to delete the nomenclature. It is currently associated with one or more receipts or products. Please delete receipt or product that have this nomenclature first before deleting the nomenclature.",
+    });
+  }
+
+  public handelCommonError() {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong! \nPlease try again"
+    });
+  }
 }

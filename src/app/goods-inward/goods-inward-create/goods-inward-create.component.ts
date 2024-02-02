@@ -115,6 +115,9 @@ export class GoodsInwardCreateComponent implements OnInit{
       this.loadingSpinnerService.hide()
       this.router.navigate(['goods-inwards'])
       this.sweetAlertService.goodsInwardCreatedAlert()
+    }, error => {
+      this.loadingSpinnerService.hide()
+      this.sweetAlertService.handelCommonError()
     })
 
   }
