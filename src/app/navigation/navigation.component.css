@@ -4,9 +4,9 @@ li {
 .active .nav-link {
 
 }
-.navbar-nav .nav-item.active .nav-link {
-  color: white !important;
-}
+/*.navbar-nav .nav-item.active .nav-link {*/
+/*  color: white !important;*/
+/*}*/
 .navbar-brand {
   color: #EFA37F;
 }
