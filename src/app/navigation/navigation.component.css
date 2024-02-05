@@ -5,5 +5,8 @@ li {
 
 }
 .navbar-nav .nav-item.active .nav-link {
-  color: black !important;
+  color: white !important;
+}
+.navbar-brand {
+  color: antiquewhite;
 }
