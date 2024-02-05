@@ -1,6 +1,7 @@
 .container {
   margin-top: 40px;
   width: 70%;
+  padding-bottom: 60px;
 }
 
 nz-select {

@@ -20,6 +20,7 @@ export class GoodsInwardCreateComponent implements OnInit{
   url = this.uriService.getFullUrl('nomenclature')
   urlCreate = this.uriService.getFullUrl('goods-inwards')
   showTable = false
+  defaultUnit = 'kg';
 
   constructor(private fb: FormBuilder,
               private http: HttpClient,
@@ -91,7 +92,7 @@ export class GoodsInwardCreateComponent implements OnInit{
     return this.fb.group({
       nomenclatureID: [''],
       nomenclatureName: ['', Validators.required],
-      unit: ['', Validators.required],
+      unit: [this.defaultUnit, Validators.required],
       quantity: ['', Validators.required],
       price: ['', Validators.required],
       sum: ['', Validators.required],

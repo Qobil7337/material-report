@@ -18,7 +18,7 @@ export class ProductCreateComponent implements OnInit{
   url = this.uriService.getFullUrl('nomenclature')
   urlCreate = this.uriService.getFullUrl('product')
   showTable = false
-
+  defaultUnit = 'kg'
   constructor(private fb: FormBuilder,
               private http: HttpClient,
               private router: Router,
@@ -126,7 +126,7 @@ export class ProductCreateComponent implements OnInit{
     return this.fb.group({
       nomenclatureID: [''],
       nomenclatureName: ['', Validators.required],
-      unit: ['', Validators.required],
+      unit: [this.defaultUnit, Validators.required],
       quantity: ['', Validators.required],
       price: ['', Validators.required],
       sum: ['', Validators.required],
