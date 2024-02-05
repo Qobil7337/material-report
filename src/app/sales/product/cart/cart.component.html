@@ -1,5 +1,5 @@
 
-<div class="container rounded border border-success" id="cart" *ngIf="cartItems && cartItems.length > 0" style="position: fixed; width: 300px; right: 10px; top: 80px; padding: 15px">
+<div class="container rounded border border-success" id="cart" *ngIf="cartItems && cartItems.length > 0" style="position: fixed; width: 300px; right: 10px; top: 80px; padding: 15px; max-height: 650px; overflow-y: auto;">
   <div class="row">
     <h3 class="col-10">Cart</h3>
     <button class="btn btn-danger col-2" style="padding: 3px 7px; font-size: 13px; width: 45px; height: 30px" (click)="onClear()">Clear</button>
