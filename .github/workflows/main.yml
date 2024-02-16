@@ -22,6 +22,9 @@ jobs:
       - name: Build App
         run: npm run build
 
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
       - name: Deploy to Droplet
         run: |
           sshpass -p MersedesBenz9999q ssh root@104.131.6.181 "cd /var/www/html/material-report-front && git pull origin master"
